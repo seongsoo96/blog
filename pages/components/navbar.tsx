@@ -19,7 +19,7 @@ export default function Navbar() {
 	return (
 		<>
 			<header className="fixed top-0 left-0 h-16 right-0 bg-orange-200 flex justify-between">
-				<div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+				<div className="container px-40 mx-auto flex flex-wrap items-center justify-between">
 					<Link href="/">
 						<a className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap text-white">
 							KimDev

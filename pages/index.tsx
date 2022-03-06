@@ -1,15 +1,48 @@
-import type { NextPage } from "next";
+import type { GetStaticProps } from "next";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Link from "next/link";
+import Date from "./components/date";
+import { getSortedPostsData } from "../lib/post";
 
-const Home: NextPage = () => {
+export const getStaticProps: GetStaticProps = async () => {
+	const allPostsData = getSortedPostsData();
+	return {
+		props: {
+			allPostsData,
+		},
+	};
+};
+
+const Home = ({
+	allPostsData,
+}: {
+	allPostsData: { date: string; title: string; id: string }[];
+}) => {
 	return (
 		<>
 			<Head>
 				<title>Blog</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<div className="text-4xl my-6">
+				<h1>제목입니다.</h1>
+			</div>
 			<div className="text-2xl">
+				{allPostsData.map(({ id, date, title }) => (
+					<Link href={`/posts/${id}`}>
+						<a>
+							<div className="my-6 border border-indigo-600">
+								{title}
+								<br />
+								<small>
+									<Date dateString={date} />
+								</small>
+							</div>
+						</a>
+					</Link>
+				))}
+			</div>
+			{/* <div className="text-2xl ">
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 					do eiusmod tempor incididunt ut labore et dolore magna
@@ -161,7 +194,7 @@ const Home: NextPage = () => {
 					Pellentesque habitant morbi tristique senectus. Fames ac
 					turpis egestas integer eget aliquet.
 				</p>
-			</div>
+			</div> */}
 		</>
 	);
 };
