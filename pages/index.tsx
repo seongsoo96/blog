@@ -1,7 +1,7 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Date from "./components/date";
+import Date from "../components/date";
 import { getSortedPostsData } from "../lib/post";
 
 export const getStaticProps: GetStaticProps = async () => {
