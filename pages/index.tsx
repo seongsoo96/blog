@@ -29,7 +29,7 @@ const Home = ({
 			</div>
 			<div className="text-2xl">
 				{allPostsData.map(({ id, date, title }) => (
-					<Link href={`/posts/${id}`}>
+					<Link key={id} href={`/posts/${id}`}>
 						<a>
 							<div className="my-6 border border-indigo-600">
 								{title}
