@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 const navigation = [
 	{ name: "Dashboard", href: "#", current: true },
@@ -35,10 +36,12 @@ export default function Navbar() {
 						))}
 						<li onClick={onClick}>
 							<button className="flex flex-row items-center w-full px-1 py-1 mt-2 text-sm font-semibold text-left bg-transparent rounded-full md:w-auto md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-								<img
-									src="https://randomuser.me/api/portraits/men/12.jpg"
+								<Image
+									src="/../public/favicon.ico"
 									className="w-auto h-6 rounded-full"
 									alt=""
+									width={40}
+									height={40}
 								/>
 							</button>
 							{drop ? (
