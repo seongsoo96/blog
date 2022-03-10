@@ -38,7 +38,7 @@ const Home = ({
 				<h2>카테고리</h2>
 				<ul>
 					{category.map((cate) => (
-						<li className="text-xl">
+						<li key={cate.name} className="text-xl">
 							<Link href={cate.href}>
 								<a>
 									<span>

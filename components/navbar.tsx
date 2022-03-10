@@ -41,6 +41,7 @@ export default function Navbar() {
 								<a
 									href="https://github.com/seongsoo96"
 									target="_blank"
+									rel="noreferrer"
 								>
 									<Image
 										src={githubImg}
