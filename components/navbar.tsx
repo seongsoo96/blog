@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
+import githubImg from "../public/github-origin-mark.png";
+import profileImg from "../public/profile.jpeg";
 
 const navigation = [
 	{ name: "Dashboard", href: "#", current: true },
@@ -36,8 +38,24 @@ export default function Navbar() {
 						))}
 						<li onClick={onClick}>
 							<button className="flex flex-row items-center w-full px-1 py-1 mt-2 text-sm font-semibold text-left bg-transparent rounded-full md:w-auto md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+								<a
+									href="https://github.com/seongsoo96"
+									target="_blank"
+								>
+									<Image
+										src={githubImg}
+										className="w-auto h-6 rounded-full"
+										alt="Github Image"
+										width={40}
+										height={40}
+									/>
+								</a>
+							</button>
+						</li>
+						<li onClick={onClick}>
+							<button className="flex flex-row items-center w-full px-1 py-1 mt-2 text-sm font-semibold text-left bg-transparent rounded-full md:w-auto md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
 								<Image
-									src="/../public/favicon.ico"
+									src={profileImg}
 									className="w-auto h-6 rounded-full"
 									alt=""
 									width={40}
