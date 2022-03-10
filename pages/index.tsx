@@ -13,11 +13,19 @@ export const getStaticProps: GetStaticProps = async () => {
 	};
 };
 
+const category = [
+	{ name: "blog", href: "/blog" },
+	{ name: "about", href: "/about" },
+	{ name: "algorithm", href: "/algorithm" },
+	{ name: "portfolio", href: "portfolio" },
+];
+
 const Home = ({
 	allPostsData,
 }: {
 	allPostsData: { date: string; title: string; id: string }[];
 }) => {
+	console.log(category[0].href);
 	return (
 		<>
 			<Head>
@@ -25,7 +33,25 @@ const Home = ({
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="text-4xl my-6">
-				<h1>제목입니다.</h1>
+				<h1>킴뎁 사이트</h1>
+				<br />
+				<h2>카테고리</h2>
+				<ul>
+					{category.map((cate) => (
+						<li className="text-xl">
+							<Link href={cate.href}>
+								<a>
+									<span>
+										-
+										<p className="underline underline-offset-4">
+											{cate.name}
+										</p>
+									</span>
+								</a>
+							</Link>
+						</li>
+					))}
+				</ul>
 			</div>
 			<div className="text-2xl">
 				{allPostsData.map(({ id, date, title }) => (
