@@ -17,7 +17,7 @@ const category = [
 	{ name: "blog", href: "/blog" },
 	{ name: "about", href: "/about" },
 	{ name: "algorithm", href: "/algorithm" },
-	{ name: "portfolio", href: "portfolio" },
+	{ name: "portfolio", href: "/portfolio" },
 ];
 
 const Home = ({
@@ -25,7 +25,6 @@ const Home = ({
 }: {
 	allPostsData: { date: string; title: string; id: string }[];
 }) => {
-	console.log(category[0].href);
 	return (
 		<>
 			<Head>
@@ -37,14 +36,13 @@ const Home = ({
 				<br />
 				<h2>카테고리</h2>
 				<ul>
-					{category.map((cate) => (
-						<li key={cate.name} className="text-xl">
-							<Link href={cate.href}>
+					{category.map((c) => (
+						<li key={c.name} className="text-xl">
+							<Link href={c.href}>
 								<a>
 									<span>
-										-
 										<p className="underline underline-offset-4">
-											{cate.name}
+											{c.name}
 										</p>
 									</span>
 								</a>
@@ -53,7 +51,7 @@ const Home = ({
 					))}
 				</ul>
 			</div>
-			<div className="text-2xl">
+			{/* <div className="text-2xl">
 				{allPostsData.map(({ id, date, title }) => (
 					<Link key={id} href={`/posts/${id}`}>
 						<a>
@@ -67,7 +65,7 @@ const Home = ({
 						</a>
 					</Link>
 				))}
-			</div>
+			</div> */}
 			{/* <div className="text-2xl ">
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
