@@ -32,7 +32,22 @@ const Home = ({
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="text-4xl my-6">
-				<h1>킴뎁 사이트</h1>
+				<h1>G&rsquo;day Mate!</h1>
+				<br />
+				<p className="text-xl">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Vivamus id condimentum elit. Aliquam eu massa facilisis,
+					dictum dui vel, rhoncus est. Donec at mollis quam. Duis
+					eleifend urna ante, vitae cursus nibh condimentum id. Duis
+					ultricies fermentum mi in sollicitudin. Proin elementum eget
+					arcu volutpat blandit. Phasellus congue auctor lacus, at
+					malesuada est commodo sit amet. Quisque a nibh lacinia lorem
+					dapibus tristique. Integer blandit nec enim ac tempor. Donec
+					convallis suscipit tellus, ut facilisis risus imperdiet
+					quis. Donec a nisi turpis. Integer metus lacus, scelerisque
+					vel fringilla sit amet, elementum placerat enim. Vestibulum
+					sit amet malesuada purus.
+				</p>
 				<br />
 				<h2>카테고리</h2>
 				<ul>
