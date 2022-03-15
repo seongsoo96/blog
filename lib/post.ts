@@ -20,18 +20,17 @@ export function getSortedPostsData() {
 		// Use gray-matter to parse the post metadata section
 		const matterResult = matter(fileContents);
 
-		const processedContent = remark()
-			.use(html)
-			.process(matterResult.content);
-		const contentHtml = processedContent.toString();
-
 		// Combine the data with the id
 		return {
 			id,
-			contentHtml,
-			...(matterResult.data as { date: string; title: string }),
+			...(matterResult.data as {
+				date: string;
+				title: string;
+				preview: string;
+			}),
 		};
 	});
+
 	// Sort posts by date
 	return allPostsData.sort((a, b) => {
 		if (a.date < b.date) {

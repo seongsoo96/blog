@@ -20,10 +20,9 @@ export default function Blog({
 		id: string;
 		title: string;
 		date: string;
-		contentHtml: string;
+		preview: string;
 	}[];
 }) {
-	console.log(allPostsData[0]);
 	return (
 		<>
 			<Head>
@@ -34,7 +33,7 @@ export default function Blog({
 				<h1>Blog</h1>
 			</div>
 			<ul className="text-2xl divide-y divide-gray-200 -m-4 md:-m-0">
-				{allPostsData.map(({ id, title, date, contentHtml }) => (
+				{allPostsData.map(({ id, title, date, preview }) => (
 					<li key={id}>
 						<Link href={`/posts/${id}`}>
 							<a>
@@ -49,12 +48,9 @@ export default function Blog({
 											{title}
 										</h1>
 										<div className="col-span-9 md:row-start-2 text-sm md:text-base flex flex-col justify-center md:py-2">
-											<p
-												className="overflow-ellipsis break-words overflow-hidden h-10 md:h-12 text-gray-400"
-												dangerouslySetInnerHTML={{
-													__html: contentHtml,
-												}}
-											/>
+											<p className="overflow-ellipsis break-words overflow-hidden h-10 md:h-12 text-gray-400">
+												{preview}
+											</p>
 											<div className="flex mt-2 md:mt-4 text-gray-500">
 												<span>
 													<Date dateString={date} />
