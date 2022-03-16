@@ -21,7 +21,39 @@ export default function Navbar() {
 	const onClick = () => (drop ? setDrop(false) : setDrop(true));
 	return (
 		<>
-			<header className="fixed top-0 left-0 h-16 right-0 bg-orange-200 flex justify-between">
+			<header>
+				<div className="px-60 flex justify-between items-center">
+					<div>
+						<Link href="/">
+							<a>
+								<h1 className="text-xl md:text-2xl font-bold">
+									KimDev
+								</h1>
+							</a>
+						</Link>
+					</div>
+					<nav>
+						<ol className="flex text-sm">
+							<Link href="/blog">
+								<a>
+									<li className="mx-3 sm:mx-4 my-5 border-b-2 border-white hover:border-primary transition duration-500 border-primary">
+										Blog
+									</li>
+								</a>
+							</Link>
+							<Link href="/about">
+								<a>
+									<li className="mx-3 sm:mx-4 my-5 border-b-2 border-white hover:border-primary transition duration-500 ">
+										About
+									</li>
+								</a>
+							</Link>
+						</ol>
+					</nav>
+				</div>
+			</header>
+
+			{/* <header className="fixed top-0 left-0 h-16 right-0 bg-orange-200 flex justify-between">
 				<div className="container px-40 mx-auto flex flex-wrap items-center justify-between">
 					<Link href="/">
 						<a className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap text-white">
@@ -81,7 +113,8 @@ export default function Navbar() {
 						</li>
 					</ul>
 				</div>
-			</header>
+			</header> */}
+
 			{/* <div>
 				<nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-teal-500 mb-3">
 					<div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
