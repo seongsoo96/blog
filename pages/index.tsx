@@ -31,10 +31,9 @@ const Home = ({
 				<title>Blog</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className="text-4xl my-6">
-				<h1>G&rsquo;day Mate!</h1>
-				<br />
-				<p className="text-xl">
+			<div className="py-14">
+				<h1 className="category-title">G&rsquo;day Mate!</h1>
+				<p className="category-description">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 					Vivamus id condimentum elit. Aliquam eu massa facilisis,
 					dictum dui vel, rhoncus est. Donec at mollis quam. Duis

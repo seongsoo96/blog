@@ -29,8 +29,13 @@ export default function Blog({
 				<title>Blog</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className="text-4xl my-6">
-				<h1>Blog</h1>
+			{/* <div className="text-4xl my-6"> */}
+			<div className="py-14">
+				<h1 className="category-title">Blog</h1>
+				<p className="category-description">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Vivamus id condimentum elit. Aliquam eu massa facilisis,
+				</p>
 			</div>
 			<ul className="text-2xl divide-y divide-gray-200 -m-4 md:-m-0">
 				{allPostsData.map(({ id, title, date, preview }) => (

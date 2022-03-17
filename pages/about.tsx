@@ -7,8 +7,12 @@ export default function About() {
 				<title>About</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className="text-4xl my-6">
-				<h1>소개 페이지</h1>
+			<div className="py-14">
+				<h1 className="category-title">소개 페이지</h1>
+				<p className="category-description">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Vivamus id condimentum elit. Aliquam eu massa facilisis,
+				</p>
 			</div>
 		</>
 	);

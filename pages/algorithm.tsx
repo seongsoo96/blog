@@ -7,8 +7,12 @@ export default function Algorithm() {
 				<title>Algorithm</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className="text-4xl my-6">
-				<h1>알고리즘 연습</h1>
+			<div className="py-14">
+				<h1 className="category-title">알고리즘 연습</h1>
+				<p className="category-description">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Vivamus id condimentum elit. Aliquam eu massa facilisis,
+				</p>
 			</div>
 		</>
 	);

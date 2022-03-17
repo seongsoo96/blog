@@ -7,8 +7,13 @@ export default function Portfolio() {
 				<title>Portfolio</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className="text-4xl my-6">
-				<h1>포트폴리오</h1>
+			<div className="py-14">
+				<h1 className="category-title">포트폴리오</h1>
+				<p className="category-description">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Vivamus id condimentum elit. Aliquam eu massa facilisis,
+				</p>
+				<button className="btn-blue">hello</button>
 			</div>
 		</>
 	);
