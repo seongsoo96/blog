@@ -22,7 +22,7 @@ export default function Navbar() {
 	return (
 		<>
 			<header>
-				<div className="px-60 flex justify-between items-center">
+				<div className="wrapper flex justify-between items-center">
 					<div>
 						<Link href="/">
 							<a>
