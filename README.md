@@ -1,7 +1,7 @@
 ### 여기서 확인할 수 있습니다.(개발중인 블로그를 볼 수 있습니다.) <br> You can check here. (You can take a look the blog being developed.)<br>-> <a href="https://blog-seongsoo96.vercel.app/" target="_blank">My blog</a>
 <!--
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).ㅇㄹㅇㄹㅇㄹㅇㄹㅇㄹ
 
 ## Getting Started
 
