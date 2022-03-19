@@ -27,7 +27,7 @@ export default function Navbar() {
 						<Link href="/">
 							<a>
 								<h1 className="text-xl md:text-2xl font-bold">
-									KimDev
+									KimDev's blog
 								</h1>
 							</a>
 						</Link>
