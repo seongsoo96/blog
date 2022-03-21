@@ -3,6 +3,8 @@ import { useState } from "react";
 import Image from "next/image";
 import githubImg from "../public/github-origin-mark.png";
 import profileImg from "../public/profile.jpeg";
+import { SunIcon, MoonIcon } from "@heroicons/react/solid";
+import { useTheme } from "next-themes";
 
 const navigation = [
 	{ name: "Dashboard", href: "#", current: true },
@@ -19,6 +21,29 @@ const profile = [
 export default function Navbar() {
 	const [drop, setDrop] = useState(false);
 	const onClick = () => (drop ? setDrop(false) : setDrop(true));
+	const { systemTheme, theme, setTheme } = useTheme();
+	const renderThemeChanger = () => {
+		const currentTheme = theme === "system" ? systemTheme : theme;
+
+		if (currentTheme === "dark") {
+			return (
+				<SunIcon
+					className="w-10 h-10 text-yellow-500"
+					role="button"
+					onClick={() => setTheme("light")}
+				/>
+			);
+		} else {
+			return (
+				<MoonIcon
+					className="w-10 h-10 text-gray-900"
+					role="button"
+					onClick={() => setTheme("dark")}
+				/>
+			);
+		}
+	};
+
 	return (
 		<>
 			<header>
@@ -27,11 +52,12 @@ export default function Navbar() {
 						<Link href="/">
 							<a>
 								<h1 className="text-xl md:text-2xl font-bold">
-									KimDev's blog
+									KimDev
 								</h1>
 							</a>
 						</Link>
 					</div>
+					{renderThemeChanger()}
 					<nav>
 						<ol className="flex text-sm">
 							<Link href="/blog">
