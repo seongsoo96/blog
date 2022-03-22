@@ -15,10 +15,18 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const category = [
-	{ name: "blog", href: "/blog" },
-	{ name: "about", href: "/about" },
-	{ name: "algorithm", href: "/algorithm" },
-	{ name: "portfolio", href: "/portfolio" },
+	{ name: "blog", href: "/blog", desc: "까먹지 않기 위해 기록한다." },
+	{ name: "about", href: "/about", desc: "저.. 궁금하신가요..?" },
+	{
+		name: "algorithm",
+		href: "/algorithm",
+		desc: "하... 코테는 늘지를 않니 ㅠㅠ",
+	},
+	{
+		name: "portfolio",
+		href: "/portfolio",
+		desc: "어디 내놓아도 부끄러운.. 작품!",
+	},
 ];
 
 const Home = ({
@@ -33,33 +41,26 @@ const Home = ({
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="py-14">
-				<h1 className="category-title">G&rsquo;day Mate!</h1>
-				<p className="category-description">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Vivamus id condimentum elit. Aliquam eu massa facilisis,
-					dictum dui vel, rhoncus est. Donec at mollis quam. Duis
-					eleifend urna ante, vitae cursus nibh condimentum id. Duis
-					ultricies fermentum mi in sollicitudin. Proin elementum eget
-					arcu volutpat blandit. Phasellus congue auctor lacus, at
-					malesuada est commodo sit amet. Quisque a nibh lacinia lorem
-					dapibus tristique. Integer blandit nec enim ac tempor. Donec
-					convallis suscipit tellus, ut facilisis risus imperdiet
-					quis. Donec a nisi turpis. Integer metus lacus, scelerisque
-					vel fringilla sit amet, elementum placerat enim. Vestibulum
-					sit amet malesuada purus.
+				<h1 className="category-title">"G&rsquo;day Mate!"</h1>
+				<p className="category-description text-2xl">
+					반갑습니다!
+					<br />
+					흐름을 읽는 개발자, 이성수입니다.
 				</p>
 				<br />
 				<h2>카테고리</h2>
+				<br />
 				<ul>
 					{category.map((c) => (
 						<li key={c.name} className="text-xl">
 							<Link href={c.href}>
 								<a>
-									<span>
+									<div className="py-4">
+										<p>{c.desc}</p>
 										<p className="underline underline-offset-4">
 											{c.name}
 										</p>
-									</span>
+									</div>
 								</a>
 							</Link>
 						</li>
