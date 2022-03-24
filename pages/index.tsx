@@ -41,7 +41,7 @@ const Home = ({
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="py-14">
-				<h1 className="category-title">"G&rsquo;day Mate!"</h1>
+				<h1 className="category-title">G&rsquo;day Mate!</h1>
 				<p className="category-description text-2xl">
 					반갑습니다!
 					<br />
