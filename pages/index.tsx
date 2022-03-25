@@ -41,7 +41,7 @@ const Home = ({
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="py-14">
-				<h1 className="category-title">G&rsquo;day Mate!</h1>
+				<h1 className="category-title">G&rsquo;day Mate!"</h1>
 				<p className="category-description text-2xl">
 					반갑습니다!
 					<br />
@@ -67,7 +67,7 @@ const Home = ({
 					))}
 				</ul>
 			</div>
-			<div className="bg-white dark:bg-slate-900 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+			{/* <div className="bg-white dark:bg-slate-900 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
 				<div>
 					<span className="inline-flex items-center justify-center p-2 bg-indigo-500 rounded-md shadow-lg">
 						<svg
@@ -88,7 +88,7 @@ const Home = ({
 					orientation, including upside-down. It even works in outer
 					space.
 				</p>
-			</div>
+			</div> */}
 			{/* <div className="text-2xl">
 				{allPostsData.map(({ id, date, title }) => (
 					<Link key={id} href={`/posts/${id}`}>
