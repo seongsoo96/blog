@@ -1,6 +1,8 @@
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
+import profileImg from "../public/profile2.jpeg";
 import { useState } from "react";
 import Date from "../components/date";
 import { getSortedPostsData } from "../lib/post";
@@ -41,11 +43,17 @@ const Home = ({
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<div className="py-14">
-				<h1 className="category-title">G&rsquo;day Mate!"</h1>
+				<h1 className="category-title">G&rsquo;day Mate!</h1>
+				<Image
+					src={profileImg}
+					alt="profile"
+					width={100}
+					height={100}
+				/>
 				<p className="category-description text-2xl">
-					반갑습니다!
+					안녕하세요&#128075;
 					<br />
-					흐름을 읽는 개발자, 이성수입니다.
+					흐름을 읽는 개발자, 이성수입니다.👨‍💻
 				</p>
 				<br />
 				<h2>카테고리</h2>
