@@ -46,7 +46,7 @@ export default function Navbar() {
 
 	return (
 		<>
-			<header>
+			<header className="border-b-2">
 				<div className="wrapper flex justify-between items-center">
 					<div>
 						<Link href="/">

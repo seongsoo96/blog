@@ -30,7 +30,7 @@ export default function Blog({
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			{/* <div className="text-4xl my-6"> */}
-			<div className="py-14">
+			<div className="category-header">
 				<h1 className="category-title">Blog</h1>
 				<p className="category-description">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit.

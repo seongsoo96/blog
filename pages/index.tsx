@@ -42,7 +42,7 @@ const Home = ({
 				<title>Blog</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div className="py-14">
+			<div className="category-header">
 				<h1 className="category-title">G&rsquo;day Mate!</h1>
 				<Image
 					src={profileImg}
@@ -56,24 +56,25 @@ const Home = ({
 					흐름을 읽는 개발자, 이성수입니다.👨‍💻
 				</p>
 				<br />
-				<h2>카테고리</h2>
-				<br />
-				<ul>
-					{category.map((c) => (
-						<li key={c.name} className="text-xl">
-							<Link href={c.href}>
-								<a>
-									<div className="py-4">
-										<p>{c.desc}</p>
-										<p className="underline underline-offset-4">
-											{c.name}
-										</p>
-									</div>
-								</a>
-							</Link>
-						</li>
-					))}
-				</ul>
+				<div className="border-2 border-orange-600">
+					<h1>카테고리</h1>
+					<ul>
+						{category.map((c) => (
+							<li key={c.name} className="text-xl">
+								<Link href={c.href}>
+									<a>
+										<div className="py-4">
+											<p>{c.desc}</p>
+											<p className="underline underline-offset-4">
+												{c.name}
+											</p>
+										</div>
+									</a>
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
 			</div>
 			{/* <div className="bg-white dark:bg-slate-900 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
 				<div>
