@@ -45,10 +45,10 @@ export default function About() {
 			</div>
 			<div className="flex justify-between items-start">
 				<div>
-					<h1>"안녕하세요👋</h1>
+					<h1>&ldquo;안녕하세요👋</h1>
 					<h1>흐름을 읽는 개발자</h1>
 					<h1>
-						<span className="font-bold">이성수</span>입니다."
+						<span className="font-bold">이성수</span>입니다.&rdquo;
 					</h1>
 					<br />
 					<p>코드의 흐름을 이해하며 발전하고 있습니다.</p>
