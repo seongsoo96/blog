@@ -71,9 +71,24 @@ export default function About() {
 						width={300}
 						height={300}
 						className="rounded-lg"
-						// layout="fixed"
+						layout="fixed"
 					/>
 				</div>
+			</div>
+			<h1>자기소개</h1>
+			<div className="border w-full">
+				<p>
+					안녕하세. 저는 @@에서 병원 솔루션을 개발하는 웹
+					개발자입니다.
+				</p>
+			</div>
+			<h1>경력사항</h1>
+			<div className="border w-full">
+				<p>
+					아직은 경력사항이 얼마 되지 않지만 채워갈 생각에 설레입니다.
+				</p>
+				<h3>@@@</h3>
+				<p>- 재직중 2021-07-21 ~</p>
 			</div>
 		</>
 	);
