@@ -90,6 +90,13 @@ export default function About() {
 				<h3>@@@</h3>
 				<p>- 재직중 2021-07-21 ~</p>
 			</div>
+			<h1>Contact</h1>
+			<h1>업무경험</h1>
+			<h1>프로젝트</h1>
+			<h1>기술스택</h1>
+			<h1>학력사항</h1>
+			<h1>자격사항</h1>
+			<p>Last Updated</p>
 		</>
 	);
 }
