@@ -44,20 +44,20 @@ const Home = ({
 			</Head>
 			<div className="category-header">
 				<h1 className="category-title">G&rsquo;day Mate!</h1>
-				<Image
+				{/* <Image
 					src={profileImg}
 					alt="profile"
 					width={100}
 					height={100}
-				/>
-				<p className="category-description text-2xl">
-					안녕하세요&#128075;
-					<br />
-					흐름을 읽는 개발자, 이성수입니다.👨‍💻
+				/> */}
+				<p className="category-description text-2xl font-bold underline underline-offset-4 decoration-8 decoration-indigo-500">
+					안녕하세요&#128075; KimDev입니다!!
+					{/* <br /> */}
+					{/* 흐름을 읽는 개발자, 이성수입니다.👨‍💻 */}
 				</p>
 				<br />
-				<div className="border-2 border-orange-600">
-					<h1>카테고리</h1>
+				<div className="border-8 border-indigo-500 rounded-lg p-6">
+					{/* <h1>카테고리</h1> */}
 					<ul>
 						{category.map((c) => (
 							<li key={c.name} className="text-xl">

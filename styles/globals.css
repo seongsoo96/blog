@@ -40,6 +40,9 @@ a {
 	.category-desc {
 		@apply text-gray-500 text-sm md:text-base;
 	}
+	.tw-dark {
+		@apply dark:bg-slate-900 dark:text-slate-400;
+	}
 }
 
 @layer components {
