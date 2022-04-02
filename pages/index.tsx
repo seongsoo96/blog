@@ -65,7 +65,7 @@ const Home = ({
 									<a>
 										<div className="py-4">
 											<p>{c.desc}</p>
-											<p className="underline underline-offset-4 dark:hover:text-sky-400">
+											<p className="underline underline-offset-4 dark:hover:text-blue-400">
 												{c.name}
 											</p>
 										</div>
