@@ -17,15 +17,15 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const category = [
-	{ name: "blog", href: "/blog", desc: "까먹지 않기 위해 기록한다." },
-	{ name: "about", href: "/about", desc: "저.. 궁금하신가요..?" },
+	{ name: "Blog", href: "/blog", desc: "까먹지 않기 위해 기록한다." },
+	{ name: "About", href: "/about", desc: "저.. 궁금하신가요..?" },
 	{
-		name: "algorithm",
+		name: "Algorithm",
 		href: "/algorithm",
 		desc: "하... 코테는 늘지를 않니 ㅠㅠ",
 	},
 	{
-		name: "portfolio",
+		name: "Portfolio",
 		href: "/portfolio",
 		desc: "어디 내놓아도 부끄러운.. 작품!",
 	},
@@ -44,29 +44,21 @@ const Home = ({
 			</Head>
 			<div className="category-header">
 				<h1 className="category-title">G&rsquo;day Mate!</h1>
-				{/* <Image
-					src={profileImg}
-					alt="profile"
-					width={100}
-					height={100}
-				/> */}
-				<p className="category-description text-2xl font-bold underline underline-offset-4 decoration-8 decoration-indigo-500">
+				<p className="category-description text-2xl font-bold underline rounded-md underline-offset-4 decoration-8 decoration-indigo-500 mb-10">
 					안녕하세요&#128075; KimDev입니다!!
-					{/* <br /> */}
-					{/* 흐름을 읽는 개발자, 이성수입니다.👨‍💻 */}
 				</p>
-				<br />
-				<div className="border-8 border-indigo-500 rounded-lg p-6">
-					{/* <h1>카테고리</h1> */}
+				{/* <div className="border-8 border-indigo-500 rounded-xl p-6">
 					<ul>
 						{category.map((c) => (
 							<li key={c.name} className="text-xl">
 								<Link href={c.href}>
 									<a>
 										<div className="py-4">
-											<p>{c.desc}</p>
-											<p className="underline underline-offset-4 dark:hover:text-blue-400">
-												{c.name}
+											<p>
+												<span className="underline underline-offset-4 dark:hover:text-blue-400">
+													{c.name}
+												</span>{" "}
+												- {c.desc}
 											</p>
 										</div>
 									</a>
@@ -74,6 +66,45 @@ const Home = ({
 							</li>
 						))}
 					</ul>
+				</div> */}
+				<div className="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
+					<div className="pt-6 md:p-8 text-center md:text-left space-y-4">
+						<blockquote>
+							<p className="text-lg font-medium">
+								“Don't worry if it doesn't work right. If
+								everything did, you'd be out of a job.”
+							</p>
+						</blockquote>
+						<figcaption className="font-medium">
+							{/* <div className="text-sky-500 dark:text-sky-400">
+								Sarah Dayan
+							</div> */}
+							<div className="text-slate-700 dark:text-slate-500">
+								Mosher's Law of Software Engineering
+							</div>
+						</figcaption>
+						<ul>
+							{category.map((c) => (
+								<li key={c.name} className="text-xl">
+									<Link href={c.href}>
+										<a>
+											<div className="py-4">
+												<p>
+													<span className="underline underline-offset-4 dark:hover:text-blue-400">
+														{c.name}
+													</span>{" "}
+													-{" "}
+													<span className="text-lg font-medium">
+														{c.desc}
+													</span>
+												</p>
+											</div>
+										</a>
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
 				</div>
 			</div>
 			{/* <div className="bg-white dark:bg-slate-900 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
