@@ -33,8 +33,7 @@ export default function Blog({
 			<div className="category-header">
 				<h1 className="category-title">Blog</h1>
 				<p className="category-description">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Vivamus id condimentum elit. Aliquam eu massa facilisis,
+					기록하면 나중에라도 기억할 지도...?
 				</p>
 			</div>
 			<ul className="text-2xl divide-y divide-gray-200 -m-4 md:-m-0">
