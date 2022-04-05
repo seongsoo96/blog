@@ -21,6 +21,7 @@ export default function Blog({
 		title: string;
 		date: string;
 		preview: string;
+		category: string;
 	}[];
 }) {
 	return (
@@ -37,14 +38,14 @@ export default function Blog({
 				</p>
 			</div>
 			<ul className="text-2xl divide-y divide-gray-200 -m-4 md:-m-0">
-				{allPostsData.map(({ id, title, date, preview }) => (
+				{allPostsData.map(({ id, title, category, date, preview }) => (
 					<li key={id}>
 						<Link href={`/posts/${id}`}>
 							<a>
 								<div className="p-4 md:p-0 md:py-8">
 									<div className="mb-1 md:mb-2">
-										<span className="bg-primary bg-opacity-50 px-1.5 text-sm md:text-base">
-											category
+										<span className="bg-primary bg-opacity-50 px-1.5 text-sm md:text-base bg-indigo-500 dark:bg-yellow-300 dark:text-indigo-900">
+											{category}
 										</span>
 									</div>
 									<div className="grid grid-cols-12">
