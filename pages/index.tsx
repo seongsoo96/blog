@@ -71,8 +71,8 @@ const Home = ({
 					<div className="pt-6 md:p-8 text-center md:text-left space-y-4">
 						<blockquote>
 							<p className="text-lg font-medium">
-								“Don't worry if it doesn't work right. If
-								everything did, you'd be out of a job.”
+								“Don&apos;t worry if it doesn&apos;t work right.
+								If everything did, you&apos;d be out of a job.”
 							</p>
 						</blockquote>
 						<figcaption className="font-medium">
@@ -80,7 +80,7 @@ const Home = ({
 								Sarah Dayan
 							</div> */}
 							<div className="text-slate-700 dark:text-slate-500">
-								Mosher's Law of Software Engineering
+								Mosher&apos;s Law of Software Engineering
 							</div>
 						</figcaption>
 						<ul>
