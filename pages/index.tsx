@@ -83,6 +83,46 @@ const Home = ({
 								Mosher&apos;s Law of Software Engineering
 							</div>
 						</figcaption>
+						{/* <ul>
+							{category.map((c) => (
+								<li key={c.name} className="text-xl">
+									<Link href={c.href}>
+										<a>
+											<div className="py-4">
+												<p>
+													<span className="underline underline-offset-4 dark:hover:text-blue-400">
+														{c.name}
+													</span>{" "}
+													-{" "}
+													<span className="text-lg font-medium">
+														{c.desc}
+													</span>
+												</p>
+											</div>
+										</a>
+									</Link>
+								</li>
+							))}
+						</ul> */}
+					</div>
+				</div>
+				<br />
+				<div className="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
+					<div className="pt-6 md:p-8 text-center md:text-left space-y-4">
+						{/* <blockquote>
+							<p className="text-lg font-medium">
+								“Don&apos;t worry if it doesn&apos;t work right.
+								If everything did, you&apos;d be out of a job.”
+							</p>
+						</blockquote> */}
+						{/* <figcaption className="font-medium">
+							<div className="text-sky-500 dark:text-sky-400">
+								Sarah Dayan
+							</div>
+							<div className="text-slate-700 dark:text-slate-500">
+								Mosher&apos;s Law of Software Engineering
+							</div>
+						</figcaption> */}
 						<ul>
 							{category.map((c) => (
 								<li key={c.name} className="text-xl">
