@@ -39,7 +39,7 @@ export default function Post({
 				</div>
 			</header>
 			<div
-				className="text-2xl my-3"
+				// className="text-2xl my-3"
 				dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
 			/>
 			{/* <article>
