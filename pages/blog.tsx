@@ -42,7 +42,7 @@ export default function Blog({
 					<li key={id}>
 						<Link href={`/posts/${id}`}>
 							<a>
-								<div className="p-4 md:p-0 md:py-8">
+								<div className="p-4 md:p-0 md:py-8 duration-700 hover:text-indigo-500">
 									<div className="mb-1 md:mb-2">
 										<span className="bg-primary bg-opacity-50 px-1.5 text-sm md:text-base bg-indigo-500 dark:bg-yellow-200 dark:text-indigo-900">
 											{category}
