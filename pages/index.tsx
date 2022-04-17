@@ -68,7 +68,7 @@ const Home = ({
 					</ul>
 				</div> */}
 				<div className="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
-					<div className="pt-6 md:p-8 text-center md:text-left space-y-4">
+					<div className="md:p-8 text-center md:text-left space-y-4">
 						<blockquote>
 							<p className="text-lg font-medium">
 								“Don&apos;t worry if it doesn&apos;t work right.
@@ -108,7 +108,7 @@ const Home = ({
 				</div>
 				<br />
 				<div className="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
-					<div className="pt-6 md:p-8 text-center md:text-left space-y-4">
+					<div className="md:p-8 text-center md:text-left space-y-4">
 						{/* <blockquote>
 							<p className="text-lg font-medium">
 								“Don&apos;t worry if it doesn&apos;t work right.

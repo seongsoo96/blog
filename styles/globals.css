@@ -43,6 +43,15 @@ a {
 	.tw-dark {
 		@apply dark:bg-slate-900 dark:text-slate-400;
 	}
+	.about-title {
+		@apply mb-5 underline decoration-4 decoration-indigo-500 dark:decoration-yellow-200;
+	}
+	article {
+		@apply mb-8 md:flex border-4 border-indigo-500 dark:border-yellow-200 bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800;
+	}
+	article .content {
+		@apply md:p-6 text-center md:text-left space-y-4;
+	}
 }
 
 @layer components {

@@ -43,7 +43,7 @@ export default function About() {
 				<h1 className="category-title">About</h1>
 				<p className="category-description w-full h-1 rounded-lg bg-slate-500 mb-6"></p>
 			</div>
-			<div className="flex justify-between items-center md:items-start flex-col-reverse md:flex-row">
+			<div className="flex justify-between items-center md:items-start flex-col-reverse md:flex-row mb-6">
 				<div className="text-center md:text-left">
 					<h1>&ldquo;안녕하세요👋</h1>
 					<h1>흐름을 읽는 개발자</h1>
@@ -75,22 +75,25 @@ export default function About() {
 					/>
 				</div>
 			</div>
-			<h1>자기소개</h1>
-			<div className="border w-full">
-				<p>
-					안녕하세. 저는 @@에서 병원 솔루션을 개발하는 웹
-					개발자입니다.
-				</p>
-			</div>
-			<h1>경력사항</h1>
-			<div className="border w-full">
-				<p>
+			<p className="category-description w-full h-px rounded-lg bg-slate-500 mb-6"></p>
+
+			<h1 className="about-title">자기소개</h1>
+
+			<article>
+				<div className="content">
+					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
+					웹개발자입니다.
+				</div>
+			</article>
+			<h1 className="about-title">경력사항</h1>
+			<article>
+				<div className="content">
 					아직은 경력사항이 얼마 되지 않지만 채워갈 생각에 설레입니다.
-				</p>
-				<h3>@@@</h3>
-				<p>- 재직중 2021-07-21 ~</p>
-			</div>
-			<h1>Contact</h1>
+					<h3>@@@</h3>
+					<p>- 재직중 2021-07-21 ~</p>
+				</div>
+			</article>
+			<h1 className="about-title">Contact</h1>
 			<h1>업무경험</h1>
 			<h1>프로젝트</h1>
 			<h1>기술스택</h1>
