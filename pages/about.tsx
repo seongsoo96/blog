@@ -94,11 +94,11 @@ export default function About() {
 				</div>
 			</article>
 			<h1 className="about-title">Contact</h1>
-			<h1>업무경험</h1>
-			<h1>프로젝트</h1>
-			<h1>기술스택</h1>
-			<h1>학력사항</h1>
-			<h1>자격사항</h1>
+			<h1 className="about-title">업무경험</h1>
+			<h1 className="about-title">프로젝트</h1>
+			<h1 className="about-title">기술스택</h1>
+			<h1 className="about-title">학력사항</h1>
+			<h1 className="about-title">자격사항</h1>
 			<p>Last Updated</p>
 		</>
 	);
