@@ -4,6 +4,27 @@ import profileImg from "../public/profile2.jpeg";
 import githubLight from "../public/github-light.png";
 import githubDark from "../public/github-dark.png";
 import { useTheme } from "next-themes";
+import Link from "next/link";
+
+const category = [
+	{ name: "Resume", href: "/blog", desc: "까먹지 않기 위해 기록한다." },
+	{ name: "Website", href: "/about", desc: "저.. 궁금하신가요..?" },
+	{
+		name: "Github",
+		href: "/algorithm",
+		desc: "https://github.com/seongsoo96",
+	},
+	{
+		name: "Email",
+		href: "/portfolio",
+		desc: "gasmathdog@gmail.com",
+	},
+	{
+		name: "Mobile",
+		href: "/portfolio",
+		desc: "010-xxxx-xxxx",
+	},
+];
 
 export default function About() {
 	const { systemTheme, theme } = useTheme();
@@ -94,6 +115,31 @@ export default function About() {
 				</div>
 			</article>
 			<h1 className="about-title">Contact</h1>
+			<article>
+				<div className="content">
+					<ul>
+						{category.map((c) => (
+							<li key={c.name} className="text-xl">
+								<Link href={c.href}>
+									<a>
+										<div className="py-4">
+											<p>
+												<span className="underline underline-offset-4 dark:hover:text-blue-400">
+													{c.name}
+												</span>{" "}
+												-{" "}
+												<span className="text-lg font-medium">
+													{c.desc}
+												</span>
+											</p>
+										</div>
+									</a>
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			</article>
 			<h1 className="about-title">업무경험</h1>
 			<h1 className="about-title">프로젝트</h1>
 			<h1 className="about-title">기술스택</h1>
