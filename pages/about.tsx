@@ -7,8 +7,8 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 
 const category = [
-	{ name: "Resume", href: "/blog", desc: "까먹지 않기 위해 기록한다." },
-	{ name: "Website", href: "/about", desc: "저.. 궁금하신가요..?" },
+	{ name: "Resume", href: "/blog", desc: "여기엔 내 블로그 주소" },
+	{ name: "Website", href: "/about", desc: "여기엔 웹사이트 주소" },
 	{
 		name: "Github",
 		href: "/algorithm",
