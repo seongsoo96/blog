@@ -141,10 +141,40 @@ export default function About() {
 				</div>
 			</article>
 			<h1 className="about-title">업무경험</h1>
+			<article>
+				<div className="content">
+					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
+					웹개발자입니다.
+				</div>
+			</article>
 			<h1 className="about-title">프로젝트</h1>
+			<article>
+				<div className="content">
+					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
+					웹개발자입니다.
+				</div>
+			</article>
 			<h1 className="about-title">기술스택</h1>
+			<article>
+				<div className="content">
+					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
+					웹개발자입니다.
+				</div>
+			</article>
 			<h1 className="about-title">학력사항</h1>
+			<article>
+				<div className="content">
+					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
+					웹개발자입니다.
+				</div>
+			</article>
 			<h1 className="about-title">자격사항</h1>
+			<article>
+				<div className="content">
+					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
+					웹개발자입니다.
+				</div>
+			</article>
 			<p>Last Updated</p>
 		</>
 	);
