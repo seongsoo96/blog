@@ -170,10 +170,7 @@ export default function About() {
 			</article>
 			<h1 className="about-title">자격사항</h1>
 			<article>
-				<div className="content">
-					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
-					웹개발자입니다.
-				</div>
+				<div className="content">email - gasmathdog@gmail.com</div>
 			</article>
 			<p>Last Updated</p>
 		</>
