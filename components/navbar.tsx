@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import githubImg from "../public/github-origin-mark.png";
 import profileImg from "../public/profile.jpeg";
@@ -19,29 +19,100 @@ const profile = [
 ];
 
 export default function Navbar() {
-	const [drop, setDrop] = useState(false);
-	const onClick = () => (drop ? setDrop(false) : setDrop(true));
+	// const [drop, setDrop] = useState(false);
+	// const onClick = () => (drop ? setDrop(false) : setDrop(true));
+	// const { systemTheme, theme, setTheme } = useTheme();
 	const { systemTheme, theme, setTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+	const [checked, setChecked] = useState(
+		systemTheme === "dark" ? false : true
+	);
+	useEffect(() => setMounted(true), []);
+	if (!mounted) return null;
 	const renderThemeChanger = () => {
 		const currentTheme = theme === "system" ? systemTheme : theme;
+		return (
+			<>
+				<li>
+					<input
+						type="checkbox"
+						id="hide-checkbox"
+						defaultChecked={checked}
+						onClick={() =>
+							setTheme(currentTheme === "dark" ? "light" : "dark")
+						}
+					/>
+					<label htmlFor="hide-checkbox" className="toggle">
+						<span className="toggle-button">
+							<span className="crater crater-1"></span>
+							<span className="crater crater-2"></span>
+							<span className="crater crater-3"></span>
+							<span className="crater crater-4"></span>
+							<span className="crater crater-5"></span>
+							<span className="crater crater-6"></span>
+							<span className="crater crater-7"></span>
+						</span>
+						<span className="star star-1"></span>
+						<span className="star star-2"></span>
+						<span className="star star-3"></span>
+						<span className="star star-4"></span>
+						<span className="star star-5"></span>
+						<span className="star star-6"></span>
+						<span className="star star-7"></span>
+						<span className="star star-8"></span>
+					</label>
+				</li>
+			</>
 
-		if (currentTheme === "dark") {
-			return (
-				<SunIcon
-					className="w-10 h-10 text-yellow-500"
-					role="button"
-					onClick={() => setTheme("light")}
-				/>
-			);
-		} else {
-			return (
-				<MoonIcon
-					className="w-10 h-10 text-gray-900"
-					role="button"
-					onClick={() => setTheme("dark")}
-				/>
-			);
-		}
+			// <button
+			// 	aria-label="Toggle Dark Mode"
+			// 	type="button"
+			// 	className="p-3 h-12 w-12 order-2 md:order-3 absolute left-2/4 transform -translate-x-2/4 lg:transform-none md:relative md:left-0"
+			// 	onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+			// >
+			// 	<svg
+			// 		xmlns="http://www.w3.org/2000/svg"
+			// 		viewBox="0 0 24 24"
+			// 		fill="currentColor"
+			// 		stroke="currentColor"
+			// 		className="h-6 w-6 text-gray-800 dark:text-gray-200"
+			// 	>
+			// 		{theme === "dark" ? (
+			// 			<path
+			// 				strokeLinecap="round"
+			// 				strokeLinejoin="round"
+			// 				strokeWidth={2}
+			// 				d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+			// 			/>
+			// 		) : (
+			// 			<path
+			// 				strokeLinecap="round"
+			// 				strokeLinejoin="round"
+			// 				strokeWidth={2}
+			// 				d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+			// 			/>
+			// 		)}
+			// 	</svg>
+			// </button>
+		);
+
+		// if (currentTheme === "dark") {
+		// 	return (
+		// 		<SunIcon
+		// 			className="w-10 h-10 text-yellow-500"
+		// 			role="button"
+		// 			onClick={() => setTheme("light")}
+		// 		/>
+		// 	);
+		// } else {
+		// 	return (
+		// 		<MoonIcon
+		// 			className="w-10 h-10 text-gray-900"
+		// 			role="button"
+		// 			onClick={() => setTheme("dark")}
+		// 		/>
+		// 	);
+		// }
 	};
 
 	return (
@@ -57,7 +128,6 @@ export default function Navbar() {
 							</a>
 						</Link>
 					</div>
-					{renderThemeChanger()}
 					<nav>
 						<ol className="flex text-sm">
 							<Link href="/blog">
@@ -74,6 +144,7 @@ export default function Navbar() {
 									</li>
 								</a>
 							</Link>
+							{renderThemeChanger()}
 						</ol>
 					</nav>
 				</div>

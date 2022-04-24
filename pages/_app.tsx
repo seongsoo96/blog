@@ -5,7 +5,11 @@ import { ThemeProvider } from "next-themes";
 
 function App({ Component, pageProps }: AppProps) {
 	return (
-		<ThemeProvider enableSystem={true} attribute="class">
+		<ThemeProvider
+			defaultTheme="system"
+			enableSystem={true}
+			attribute="class"
+		>
 			<Layout>
 				<Component {...pageProps} />
 			</Layout>
