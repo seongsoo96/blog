@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-}
+	reactStrictMode: true,
+	images: {
+		domains: ["img.shields.io"],
+		dangerouslyAllowSVG: true,
+		contentSecurityPolicy:
+			"default-src 'self'; script-src 'none'; sandbox;",
+	},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

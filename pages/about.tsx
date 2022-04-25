@@ -26,6 +26,49 @@ const category = [
 	},
 ];
 
+const badge = [
+	{
+		alt: "JavaScript",
+		src: "https://img.shields.io/badge/Javascript-ffb13b?style=flat-square&logo=javascript&logoColor=white",
+	},
+	{
+		alt: "Java",
+		src: "https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white",
+	},
+	{
+		alt: "HTML5",
+		src: "https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white",
+	},
+	{
+		alt: "CSS3",
+		src: "https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white",
+	},
+	{
+		alt: "Spring",
+		src: "https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white",
+	},
+	{
+		alt: "Spring Boot",
+		src: "https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white",
+	},
+	{
+		alt: "Vue.js",
+		src: "https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=vue.js&logoColor=white",
+	},
+	{
+		alt: "Handlebars.js",
+		src: "https://img.shields.io/badge/Handlebar.js-000000?style=flat-square&logo=Handlebars.js&logoColor=white",
+	},
+	{
+		alt: "MariaDB",
+		src: "https://img.shields.io/badge/OracleDB-F80000?style=flat-square&logo=Oracle&logoColor=white",
+	},
+	{
+		alt: "MySQL",
+		src: "https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=MariaDB&logoColor=white",
+	},
+];
+
 export default function About() {
 	const { systemTheme, theme } = useTheme();
 	const githubImg = () => {
@@ -156,62 +199,20 @@ export default function About() {
 			</article>
 			<h1 className="about-title">기술스택</h1>
 			<article>
-				<div className="content">
-					<Image
-						src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/Javascript-ffb13b?style=flat-square&logo=javascript&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/Spring-6DB33F?style=flat-square&logo=Spring&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=vue.js&logoColor=white"
-						width={100}
-						height={50}
-					/>{" "}
-					<Image
-						src="https://img.shields.io/badge/Handlebar.js-000000?style=flat-square&logo=Handlebars.js&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/OracleDB-F80000?style=flat-square&logo=Oracle&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=MariaDB&logoColor=white"
-						width={100}
-						height={50}
-					/>
-					<Image
-						src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"
-						width={100}
-						height={50}
-					/>
+				<div className="content flex justify-center items-start flex-wrap">
+					{badge.map((b) => (
+						<div
+							key={b.alt}
+							className="w-[100px] h-[20px] relative flex m-2"
+						>
+							<Image
+								src={b.src}
+								layout="fill"
+								objectFit="contain"
+								alt={b.alt}
+							/>
+						</div>
+					))}
 				</div>
 			</article>
 			<h1 className="about-title">학력사항</h1>
