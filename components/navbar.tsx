@@ -127,14 +127,14 @@ export default function Navbar() {
 						<ol className="flex text-sm">
 							<Link href="/blog">
 								<a>
-									<li className="mx-3 sm:mx-4 my-5 border-b-2 border-black dark:border-white hover:border-primary transition duration-500 border-primary">
+									<li className="mx-3 sm:mx-4 my-5 border-b-2 border-indigo-500 dark:border-white hover:border-primary transition duration-500 border-primary">
 										Blog
 									</li>
 								</a>
 							</Link>
 							<Link href="/about">
 								<a>
-									<li className="mx-3 sm:mx-4 my-5 border-b-2 border-black dark:border-white hover:border-primary transition duration-500 ">
+									<li className="mx-3 sm:mx-4 my-5 border-b-2 border-indigo-500 dark:border-white hover:border-primary transition duration-500 ">
 										About
 									</li>
 								</a>
