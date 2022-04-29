@@ -45,7 +45,7 @@ const Home = ({
 			<div className="category-header">
 				<h1 className="category-title">G&rsquo;day Mate!</h1>
 				<p className="category-description text-2xl font-bold underline rounded-md underline-offset-4 decoration-8 decoration-indigo-500 mb-10">
-					안녕하세요&#128075; KimDev입니다!!!
+					안녕하세요&#128075; KimDev입니다!!!!
 				</p>
 				{/* <div className="border-8 border-indigo-500 rounded-xl p-6">
 					<ul>
