@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps) {
 		<>
 			<Navbar />
 			{/* <main className="max-w-5xl mx-auto px-5 py-20 sm:px-6 md:px-8 xl:px-12 xl:max-w-5xl"> */}
-			<main className="wrapper">{children}</main>
+			<main className="wrapper mt-16">{children}</main>
 			<Footer />
 		</>
 	);
