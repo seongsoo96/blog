@@ -78,7 +78,7 @@ export default function About() {
 			return (
 				<Image
 					src={githubDark}
-					className="w-auto h-6 rounded-full hover:"
+					className="w-auto h-6 rounded-full"
 					alt="Github"
 					width={40}
 					height={40}
@@ -140,9 +140,7 @@ export default function About() {
 				</div>
 			</div>
 			<p className="category-description w-full h-px rounded-lg bg-slate-500 mb-6"></p>
-
 			<h1 className="about-title">자기소개</h1>
-
 			<article>
 				<div className="content">
 					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
@@ -218,13 +216,27 @@ export default function About() {
 			<h1 className="about-title">학력사항</h1>
 			<article>
 				<div className="content">
-					안녕하세요. 저는 @@에서 병원 솔루션을 개발하는
-					웹개발자입니다.
+					<p className="font-bold">방송통신대학교</p>
+					<p className="ml-2">- 컴퓨터과학과</p>
+					<p className="ml-2">- 재학중 (2022-03 ~ )</p>
+					<br />
+					<p className="font-bold">CCA(Crested Crane Academy)</p>
+					<p className="ml-2">- 잠비아 사립 고등학교</p>
+					<p className="ml-2">- 졸업 2014.06 ~ 2015.05</p>
+					<br />
+					<p className="font-bold">의정부 고등학교</p>
+					<p className="ml-2">- 중퇴 2012.03 ~ 2014.06</p>
 				</div>
 			</article>
 			<h1 className="about-title">자격사항</h1>
 			<article>
-				<div className="content">email - gasmathdog@gmail.com</div>
+				<div className="content">
+					<p className="font-bold">SQLD</p>
+					<p className="ml-2">- 2021.12</p>
+					<br />
+					<p className="font-bold">정보처리기능사</p>
+					<p className="ml-2">- 2021.05</p>
+				</div>
 			</article>
 			<p>Last Updated</p>
 		</>
