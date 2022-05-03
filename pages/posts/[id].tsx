@@ -2,6 +2,7 @@ import Head from "next/head";
 import { getAllPostIds, getPostData } from "../../lib/post";
 import { GetStaticProps, GetStaticPaths } from "next";
 import Date from "../../components/date";
+import { Comments } from "../../components/comments";
 
 export default function Post({
 	postData,
@@ -59,6 +60,7 @@ export default function Post({
 					dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
 				/>
 			</article> */}
+			{/* <Comments /> */}
 		</>
 	);
 }
