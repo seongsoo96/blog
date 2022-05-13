@@ -1,4 +1,7 @@
 ### 여기서 확인할 수 있습니다.(개발중인 블로그를 볼 수 있습니다.) <br> You can check here. (You can take a look the blog being developed.)<br>-> <a href="https://blog-seongsoo96.vercel.app/" target="_blank">My blog</a>
+
+현재 타입스크립트와 리액트부분이 어려워서 막힌 상태입니다..
+공부중에 있고 조금더 실력 키워서 이어서 작업할 예정입니다.
 <!--
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).ㅇㄹㅇㄹㅇㄹㅇㄹㅇㄹ
