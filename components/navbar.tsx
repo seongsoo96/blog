@@ -1,21 +1,20 @@
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+// import { useState } from 'react';
 
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-];
-const profile = [
-  { name: 'menu1', href: '#' },
-  { name: 'menu2', href: '#' },
-  { name: 'menu3', href: '#' },
-];
+// const navigation = [
+//   { name: 'Dashboard', href: '#', current: true },
+//   { name: 'Team', href: '#', current: false },
+//   { name: 'Projects', href: '#', current: false },
+//   { name: 'Calendar', href: '#', current: false },
+// ];
+// const profile = [
+//   { name: 'menu1', href: '#' },
+//   { name: 'menu2', href: '#' },
+//   { name: 'menu3', href: '#' },
+// ];
 
 export default function Navbar() {
-  const [mounted, setMounted] = useState(false);
   const { systemTheme, theme, setTheme } = useTheme();
   const renderThemeChanger = () => {
     const currentTheme = theme === 'system' ? systemTheme : theme;

@@ -1,11 +1,8 @@
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { rainbow } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
-interface Props {
-  children?: string | string[];
-}
 
-const CopyButton = ({ target }: any) => {
+const CopyButton = ({ target }: { target: string }) => {
   const handleCopy = async () => {
     if (target) {
       try {
@@ -25,7 +22,7 @@ const CopyButton = ({ target }: any) => {
   );
 };
 
-export default function CodeBlock({ children }: Props) {
+export default function CodeBlock({ children }: { children: string }) {
   return (
     <div className="relative">
       <CopyButton target={children} />
@@ -34,7 +31,7 @@ export default function CodeBlock({ children }: Props) {
         showLineNumbers
         language="typescript"
         style={rainbow}>
-        {children || ''}
+        {children}
       </SyntaxHighlighter>
     </div>
   );
