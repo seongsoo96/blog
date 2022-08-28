@@ -83,7 +83,7 @@ export default function Post({
 					dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
 				/>
 			</article> */}
-      {/* <Comments /> */}
+      <Comments />
     </>
   );
 }
