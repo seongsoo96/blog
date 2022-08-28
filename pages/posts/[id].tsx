@@ -34,7 +34,6 @@ export default function Post({
     contentHtml: string;
   };
 }) {
-  console.log(postData);
   return (
     <>
       <Head>
