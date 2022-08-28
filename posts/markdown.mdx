@@ -1,0 +1,26 @@
+---
+title: 'CodeBlock'
+category: 'dev'
+date: '2022-08-02'
+preview: 'We recommend using Static Generation (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.'
+---
+
+```
+const sayHi = () => {
+  return console.log('hi);
+}
+
+```
+
+<div>
+  Let's try button here.
+  <Button>Just click here</Button>
+</div>
+
+<CodeBlock>
+  {`
+  const sayHi = () => {
+    return console.log('hi')
+  }
+`}
+</CodeBlock>
