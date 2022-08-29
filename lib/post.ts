@@ -83,12 +83,12 @@ export async function getPostData(id: string) {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
 
-    const mdxSource = await serialize(matterResult.content)
+    const mdxSource = await serialize(matterResult.content);
 
-		return {
-			id,
-			mdxSource,
-			...matterResult.data,
-		}
+    return {
+      id,
+      mdxSource,
+      ...matterResult.data,
+    };
   }
 }

@@ -1,17 +1,17 @@
-import Navbar from "./navbar";
-import Footer from "./footer";
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 interface LayoutProps {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-	return (
-		<>
-			<Navbar />
-			{/* <main className="max-w-5xl mx-auto px-5 py-20 sm:px-6 md:px-8 xl:px-12 xl:max-w-5xl"> */}
-			<main className="wrapper mt-16">{children}</main>
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar />
+      {/* <main className="max-w-5xl mx-auto px-5 py-20 sm:px-6 md:px-8 xl:px-12 xl:max-w-5xl"> */}
+      <main className="wrapper mt-16">{children}</main>
+      <Footer />
+    </>
+  );
 }

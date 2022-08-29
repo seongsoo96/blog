@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import { getAllPostIds, getPostData } from '../../lib/post';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import Date from '../../components/date';
-import { Comments } from '../../components/comments';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { ReactNode } from 'react';
 import CodeBlock from '../../components/CodeBlock';
+import Date from '../../components/Date';
+import Comments from '../../components/Comments';
 
 interface Props {
   children?: ReactNode;
