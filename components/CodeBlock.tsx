@@ -16,7 +16,8 @@ const CopyButton = ({ target }: { target: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="absolute top-0.5 rounded-lg px-2 right-0.5 bg-white dark:text-gray-800">
+      className="absolute top-0.5 rounded-lg px-2 right-0.5 bg-white dark:text-gray-800"
+    >
       copy
     </button>
   );
@@ -30,7 +31,8 @@ export default function CodeBlock({ children }: { children: string }) {
         className="rounded-lg"
         showLineNumbers
         language="typescript"
-        style={rainbow}>
+        style={rainbow}
+      >
         {children}
       </SyntaxHighlighter>
     </div>

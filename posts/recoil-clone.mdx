@@ -1,0 +1,357 @@
+---
+title: 'Recoil 직접 구현하기 (동작원리 이해)'
+category: 'dev'
+date: '2022-09-17'
+preview: 'We recommend using Static Generation (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.'
+---
+
+Recoil을 쓰다보니 직접 구현해보면 더 잘 이해할 수 있을거 같아서 자료를 찾아보았다.
+
+### References
+
+- [Rewriting Recoil from scratch](https://bennetthardwick.com/recoil-from-scratch/)
+- [Recoil Docs](https://recoiljs.org/)
+
+## Atoms
+
+### 먼저 Atom class를 선언해보자
+
+```
+class Atom<T> {
+  constructor(private value: T) {}
+
+  // setter
+  update(value: T) {
+    this.value = value;
+  }
+
+  // getter
+  snapshot(): T {
+    return this.value;
+  }
+}
+```
+
+<CodeBlock>
+{`class Atom<T> {
+constructor(private value: T) {}
+
+// setter
+update(value: T) {
+this.value = value;
+}
+
+// getter
+snapshot(): T {
+return this.value;
+}
+}`}
+
+</CodeBlock>
+
+Recoil은 “atoms”이란 개념을 채택한다. Atoms는 상태의 단위이며, 업데이트와 구독이 가능하다. atoms이 업데이트되면 각각의 구독된 컴포넌트는 새로운 값을 반영하여 다시 렌더링 된다.
+
+### 수정된 Atom class
+
+```tsx
+type Disconnecter = { disconnect: () => void };
+
+class Atom<T> {
+  private listeners = new Set<(value: T) => void>();
+
+  constructor(private value: T) {}
+
+  update(value: T) {
+    this.value = value;
+    this.emit();
+  }
+
+  snapshot(): T {
+    return this.value;
+  }
+
+  emit() {
+    for (const listener of this.listeners) {
+      listener(this.snapshot());
+    }
+  }
+
+  subscribe(callback: (value: T) => void): Disconnecter {
+    this.listeners.add(callback);
+    return {
+      disconnect: () => {
+        this.listeners.delete(callback);
+      },
+    };
+  }
+}
+```
+
+상태 변화를 감지하기 위해선 [observer pattern](https://www.tutorialspoint.com/design_pattern/observer_pattern.htm)이 필요하다. 쉽게 말하자면 특정 객체가 변할 때 그와 연관된 객체들에게 알림을 보내는 패턴이다.
+
+누가(listeners) 상태를 듣고 있는지 알기 위해 `Set`콜백을 사용한다. `Set`은 고유한 항목만 포함하는 데이터 구조이다. JavaScript에서는 쉽게 배열로 변환할 수 있고 항목을 빠르게 추가 및 제거하는데 유용한 구조이다.
+
+listeners 추가는 `subscribe` method를 통해 수행된다. `subscribe` method는 `Disconnector`를 반환해주는데 이는 listener가 더이상 listen을 못하게끔 멈추는 method를 가지고 있는 interface이다. 이것은 React 컴포넌트가 unmount될 때 즉, 더이상 변화 감지를 원하지 않을 때 call된다.
+
+`emit` method는 listeners들을 loop돌면서 현재의 상태를 알려주는 역할을 한다.
+
+`update` method에 `emit` method을 추가해주면서 모든 listeners들이 상태 변화를 감지한다.
+
+### Atom을 이용해 hook을 만들어보자.
+
+```tsx
+export function useCoiledValue<T>(value: Atom<T>): T {
+  const [, updateState] = useState({});
+
+  useEffect(() => {
+    const { disconnect } = value.subscribe(() => updateState({}));
+    return () => disconnect();
+  }, [value]);
+
+  return value.snapshot();
+}
+```
+
+`useCoiledValue`(`useRecoilValue`의 직접 구현 버전)라는 이름으로 hook을 만들어본다. 이 hook은 현재 atom의 state를 반환해주고 value가 바뀔때마다 listen하고 리렌더링 해준다. 언제든 hook이 unmount 되면 listener와 연결을 끊는다.
+
+```tsx
+export function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
+  const value = useCoiledValue(atom);
+  return [value, useCallback((value) => atom.update(value), [atom])];
+}
+```
+
+다음은 `useCoiledState`(`useRecoilState`의 직접 구현 버전)을 구현한다. `React.useState`와 유사한 형태이다.
+
+```tsx
+class Stateful<T> {
+  private listeners = new Set<(value: T) => void>();
+
+  constructor(private value: T) {}
+
+  protected _update(value: T) {
+    this.value = value;
+    this.emit();
+  }
+
+  snapshot(): T {
+    return this.value;
+  }
+
+  subscribe(callback: (value: T) => void): Disconnecter {
+    this.listeners.add(callback);
+    return {
+      disconnect: () => {
+        this.listeners.delete(callback);
+      },
+    };
+  }
+}
+
+class Atom<T> extends Stateful<T> {
+  update(value: T) {
+    super._update(value);
+  }
+}
+```
+
+이렇게 만들어 놓으면 Atoms에 대한 구현이 끝나지만 Selectors를 구현할 때 좀 더 쉽게 하기 위해서 Atom class를 Stateful class에 상속받게 수정해보자. (Selectors는 Atoms과 비슷하게 stateful value다)
+
+## Selectors
+
+> A **selector** represents a piece of **derived state**. You can think of derived state as the output of passing state to a pure function that derives a new value from the said state.
+
+selector는 Recoil 버전의 computed values 혹은 reducers라 보면 된다.
+
+그림보면 알 수 있듯이 사실 되게 단순한 구조이다. 각각의 atom들을 `get` method로 구독할 수 있고 구독된 state들이 변화될 때마다 selector도 변화 감지 후의 결과값을 반환해준다.
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1f18259a-8156-4e26-8226-ec47cf37735c/Untitled.png)
+
+### Selector class를 선언해보자
+
+```tsx
+type SelectorGenerator<T> = (context: GeneratorContext) => T;
+```
+
+컨텍스트 객체( `neeratorContext`)를 매개변수로 사용하고 일부 값을 반환 하는 함수입니다 `T`. 이 반환 값은 선택기의 내부 상태가 됩니다.)
+
+```tsx
+interface GeneratorContext {
+  get: <V>(dependency: Stateful<V>) => V;
+}
+```
+
+`GeneratorContext`는 selector가 자체 내부 상태를 생성할 때 다른 상태를 사용하는 방법입니다. 이제부터 이러한 상태를 `dependency`이라고 부를 것입니다.
+
+`GeneratorContext`에서 get method를 호출할때마다 state를 dependency로서 추가하게 된다. 이는 `dependency`가 update될때마다 selector도 update됨을 의미한다.
+
+```tsx
+export class Selector<T> extends Stateful<T> {
+  private getDep<V>(dep: Stateful<V>): V {
+    return dep.snapshot();
+  }
+
+  constructor(private readonly generate: SelectorGenerator<T>) {
+    super(undefined as any);
+    const context = {
+      get: (dep) => this.getDep(dep),
+    };
+    this.value = generate(context);
+  }
+}
+```
+
+generate 기능을 제외한 Selector 클래스이다. 이 클래스는 generate함수를 매개변수로 받고 getDep method를 사용하여 Atom의 dependency를 반환한다.
+
+이와 같은 Selector는 state를 한 번만 생성하는 데 적합하다. dependency의 변경사항을 감지하려면 dependency를 구독해야한다.
+
+```tsx
+export class Selector<T> extends Stateful<T> {
+  private registeredDeps = new Set<Stateful>();
+
+  private getDep<V>(dep: Stateful<V>): V {
+    if (!this.registeredDeps.has(dep)) {
+      dep.subscribe(() => this.updateSelector());
+      this.registeredDeps.add(dep);
+    }
+
+    return dep.snapshot();
+  }
+
+  private updateSelector() {
+    const context = {
+      get: (dep) => this.getDep(dep),
+    };
+    this.update(this.generate(context));
+  }
+
+  constructor(private readonly generate: SelectorGenerator<T>) {
+    super(undefined as any);
+    const context = {
+      get: (dep) => this.getDep(dep),
+    };
+    this.value = generate(context);
+  }
+}
+```
+
+그렇게 하기 위해서 `getDep`에 `dependencies`를 구독하고 `updateSelector` method를 호출하도록 추가해보자. selector가 변경당 한번 update되도록 하기 위해 deps를 Set으로 사용한다.
+
+이렇게 하면 모든 준비가 recoil 직접 구현을 완료하게 된다. 물론 그 외에도 많은 기능들이 있지만 가장 핵심인 atom과 selector를 구현한 것이므로 recoil이 어떻게 동작하는 지에 대해 이해하기에는 문제 없을 것이다.
+
+이 모든 기능들을 하나로 통합한 코드입니다.
+
+```tsx
+import { useState, useEffect, useCallback } from 'react';
+
+interface Disconnect {
+  disconnect: () => void;
+}
+
+export class Stateful<T> {
+  private listeners = new Set<(value: T) => void>();
+
+  constructor(protected value: T) {}
+
+  snapshot(): T {
+    return this.value;
+  }
+
+  private emit() {
+    for (const listener of Array.from(this.listeners)) {
+      listener(this.snapshot());
+    }
+  }
+
+  protected update(value: T) {
+    if (this.value !== value) {
+      this.value = value;
+      this.emit();
+    }
+  }
+
+  subscribe(callback: (value: T) => void): Disconnect {
+    this.listeners.add(callback);
+    return {
+      disconnect: () => {
+        this.listeners.delete(callback);
+      },
+    };
+  }
+}
+
+export class Atom<T> extends Stateful<T> {
+  public setState(value: T) {
+    super.update(value);
+  }
+}
+
+interface GeneratorContext {
+  get: <V>(dep: Stateful<V>) => V;
+}
+
+type SelectorGenerator<T> = (context: GeneratorContext) => T;
+
+export class Selector<T> extends Stateful<T> {
+  private registeredDeps = new Set<Stateful<any>>();
+
+  private addDep<V>(dep: Stateful<V>): V {
+    if (!this.registeredDeps.has(dep)) {
+      dep.subscribe(() => this.updateSelector());
+      this.registeredDeps.add(dep);
+    }
+
+    return dep.snapshot();
+  }
+
+  private updateSelector() {
+    this.update(this.generate({ get: (dep) => this.addDep(dep) }));
+  }
+
+  constructor(private readonly generate: SelectorGenerator<T>) {
+    super(undefined as any);
+    this.value = generate({ get: (dep) => this.addDep(dep) });
+  }
+}
+
+export function atom<V>(value: { key: string; default: V }): Atom<V> {
+  return new Atom(value.default);
+}
+
+export function selector<V>(value: {
+  key: string;
+  get: SelectorGenerator<V>;
+}): Selector<V> {
+  return new Selector(value.get);
+}
+
+export function useCoiledValue<T>(value: Stateful<T>): T {
+  const [, updateState] = useState({});
+
+  useEffect(() => {
+    const { disconnect } = value.subscribe(() => updateState({}));
+    return () => disconnect();
+  }, [value]);
+
+  return value.snapshot();
+}
+
+export function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
+  const value = useCoiledValue(atom);
+  return [value, useCallback((value) => atom.setState(value), [atom])];
+}
+```
+
+## 테스트
+
+### 프로젝트 구성
+
+![아이패드가 있으니 활용 겸 그려봤는데 영 재능이 없네요. 개발에 집중하겠습니다.](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c6537e38-3767-4e4f-bdd1-30ef2b78d669/%E1%84%82%E1%85%A1%E1%86%A8%E1%84%89%E1%85%A5%E1%84%8C%E1%85%A1%E1%86%BC-8_2.jpg)
+
+아이패드가 있으니 활용 겸 그려봤는데 영 재능이 없네요. 개발에 집중하겠습니다.
+
+![스크린샷 2022-09-14 오후 9.05.51.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e3f2b917-4863-48e5-9189-fbd9d1c6c797/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-14_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.05.51.png)
+
+각각의 컴포넌트 안에서 atom들의 변경될 때마다 sumSelector도 동시에 상태 변화를 감지하여 값을 변경해주게 됩니다.
+
+코드 확인은 여기서 하실 수 있습니다.

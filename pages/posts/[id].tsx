@@ -15,7 +15,8 @@ const Button = ({ children }: Props) => {
   return (
     <button
       className="bg-black dark:bg-white text-lg text-teal-200 dark:text-teal-700 rounded-lg px-5"
-      onClick={() => alert(`thanks to ${children}`)}>
+      onClick={() => alert(`thanks to ${children}`)}
+    >
       {children}
     </button>
   );
