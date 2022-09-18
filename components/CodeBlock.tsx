@@ -29,7 +29,7 @@ export default function CodeBlock({ children }: { children: string }) {
       <CopyButton target={children} />
       <SyntaxHighlighter
         className="rounded-lg"
-        showLineNumbers
+        // showLineNumbers
         language="typescript"
         style={rainbow}
       >

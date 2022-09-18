@@ -60,7 +60,7 @@ export default function Navbar() {
           <div>
             <Link href="/">
               <a>
-                <h1 className="text-xl md:text-2xl font-bold">KimDev</h1>
+                <h1 className="text-xl md:text-2xl font-bold">Seongsoo.me</h1>
               </a>
             </Link>
           </div>

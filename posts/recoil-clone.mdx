@@ -2,7 +2,7 @@
 title: 'Recoil 직접 구현하기 (동작원리 이해)'
 category: 'dev'
 date: '2022-09-17'
-preview: 'We recommend using Static Generation (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.'
+preview: 'Recoil을 쓰다보니 직접 구현해보면 더 잘 이해할 수 있지 않을까?'
 ---
 
 Recoil을 쓰다보니 직접 구현해보면 더 잘 이해할 수 있을거 같아서 자료를 찾아보았다.
@@ -16,48 +16,31 @@ Recoil을 쓰다보니 직접 구현해보면 더 잘 이해할 수 있을거 �
 
 ### 먼저 Atom class를 선언해보자
 
-```
-class Atom<T> {
+<CodeBlock>
+{`class Atom<T> {
   constructor(private value: T) {}
 
   // setter
   update(value: T) {
-    this.value = value;
+  this.value = value;
   }
 
   // getter
-  snapshot(): T {
-    return this.value;
+  snapshot(): T  {
+  return this.value;
   }
-}
-```
-
-<CodeBlock>
-{`class Atom<T> {
-constructor(private value: T) {}
-
-// setter
-update(value: T) {
-this.value = value;
-}
-
-// getter
-snapshot(): T {
-return this.value;
-}
 }`}
-
 </CodeBlock>
 
 Recoil은 “atoms”이란 개념을 채택한다. Atoms는 상태의 단위이며, 업데이트와 구독이 가능하다. atoms이 업데이트되면 각각의 구독된 컴포넌트는 새로운 값을 반영하여 다시 렌더링 된다.
 
 ### 수정된 Atom class
 
-```tsx
-type Disconnecter = { disconnect: () => void };
+<CodeBlock>
+{`type Disconnecter = { disconnect: () => void };
 
 class Atom<T> {
-  private listeners = new Set<(value: T) => void>();
+  private listeners = new Set<(value: T) => void>()zz
 
   constructor(private value: T) {}
 
@@ -84,8 +67,8 @@ class Atom<T> {
       },
     };
   }
-}
-```
+}`}
+</CodeBlock>
 
 상태 변화를 감지하기 위해선 [observer pattern](https://www.tutorialspoint.com/design_pattern/observer_pattern.htm)이 필요하다. 쉽게 말하자면 특정 객체가 변할 때 그와 연관된 객체들에게 알림을 보내는 패턴이다.
 
@@ -99,33 +82,33 @@ listeners 추가는 `subscribe` method를 통해 수행된다. `subscribe` metho
 
 ### Atom을 이용해 hook을 만들어보자.
 
-```tsx
-export function useCoiledValue<T>(value: Atom<T>): T {
-  const [, updateState] = useState({});
+<CodeBlock>
+{`function useCoiledValue <T> (value: Atom<T>): T {
+    const [, updateState] = useState({});
 
-  useEffect(() => {
-    const { disconnect } = value.subscribe(() => updateState({}));
-    return () => disconnect();
-  }, [value]);
+    useEffect(() => {
+      const { disconnect } = value.subscribe(() => updateState({}));
+      return () => disconnect();
+    }, [value]);
 
-  return value.snapshot();
-}
-```
+    return value.snapshot();
+  }`}
+</CodeBlock>
 
 `useCoiledValue`(`useRecoilValue`의 직접 구현 버전)라는 이름으로 hook을 만들어본다. 이 hook은 현재 atom의 state를 반환해주고 value가 바뀔때마다 listen하고 리렌더링 해준다. 언제든 hook이 unmount 되면 listener와 연결을 끊는다.
 
-```tsx
-export function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
+<CodeBlock>
+{`function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
   const value = useCoiledValue(atom);
   return [value, useCallback((value) => atom.update(value), [atom])];
-}
-```
+}`}
+</CodeBlock>
 
 다음은 `useCoiledState`(`useRecoilState`의 직접 구현 버전)을 구현한다. `React.useState`와 유사한 형태이다.
 
-```tsx
-class Stateful<T> {
-  private listeners = new Set<(value: T) => void>();
+<CodeBlock>
+{`class Stateful<T> {
+  private listeners = new Set<(value: T) => void>()}
 
   constructor(private value: T) {}
 
@@ -152,8 +135,8 @@ class Atom<T> extends Stateful<T> {
   update(value: T) {
     super._update(value);
   }
-}
-```
+}`}
+</CodeBlock>
 
 이렇게 만들어 놓으면 Atoms에 대한 구현이 끝나지만 Selectors를 구현할 때 좀 더 쉽게 하기 위해서 Atom class를 Stateful class에 상속받게 수정해보자. (Selectors는 Atoms과 비슷하게 stateful value다)
 
@@ -169,24 +152,25 @@ selector는 Recoil 버전의 computed values 혹은 reducers라 보면 된다.
 
 ### Selector class를 선언해보자
 
-```tsx
-type SelectorGenerator<T> = (context: GeneratorContext) => T;
-```
+<CodeBlock>
+{`
+type SelectorGenerator<T> = (context: GeneratorContext) => T;`}
+</CodeBlock>
 
 컨텍스트 객체( `neeratorContext`)를 매개변수로 사용하고 일부 값을 반환 하는 함수입니다 `T`. 이 반환 값은 선택기의 내부 상태가 됩니다.)
 
-```tsx
-interface GeneratorContext {
+<CodeBlock>
+{`interface GeneratorContext {
   get: <V>(dependency: Stateful<V>) => V;
-}
-```
+}`}
+</CodeBlock>
 
 `GeneratorContext`는 selector가 자체 내부 상태를 생성할 때 다른 상태를 사용하는 방법입니다. 이제부터 이러한 상태를 `dependency`이라고 부를 것입니다.
 
 `GeneratorContext`에서 get method를 호출할때마다 state를 dependency로서 추가하게 된다. 이는 `dependency`가 update될때마다 selector도 update됨을 의미한다.
 
-```tsx
-export class Selector<T> extends Stateful<T> {
+<CodeBlock>
+{`class Selector<T> extends Stateful<T> {
   private getDep<V>(dep: Stateful<V>): V {
     return dep.snapshot();
   }
@@ -198,15 +182,15 @@ export class Selector<T> extends Stateful<T> {
     };
     this.value = generate(context);
   }
-}
-```
+}`}
+</CodeBlock>
 
 generate 기능을 제외한 Selector 클래스이다. 이 클래스는 generate함수를 매개변수로 받고 getDep method를 사용하여 Atom의 dependency를 반환한다.
 
 이와 같은 Selector는 state를 한 번만 생성하는 데 적합하다. dependency의 변경사항을 감지하려면 dependency를 구독해야한다.
 
-```tsx
-export class Selector<T> extends Stateful<T> {
+<CodeBlock>
+{`class Selector<T> extends Stateful<T> {
   private registeredDeps = new Set<Stateful>();
 
   private getDep<V>(dep: Stateful<V>): V {
@@ -232,8 +216,8 @@ export class Selector<T> extends Stateful<T> {
     };
     this.value = generate(context);
   }
-}
-```
+}`}
+</CodeBlock>
 
 그렇게 하기 위해서 `getDep`에 `dependencies`를 구독하고 `updateSelector` method를 호출하도록 추가해보자. selector가 변경당 한번 update되도록 하기 위해 deps를 Set으로 사용한다.
 
@@ -241,14 +225,14 @@ export class Selector<T> extends Stateful<T> {
 
 이 모든 기능들을 하나로 통합한 코드입니다.
 
-```tsx
-import { useState, useEffect, useCallback } from 'react';
+<CodeBlock>
+{`import { useState, useEffect, useCallback } from 'react';
 
 interface Disconnect {
   disconnect: () => void;
 }
 
-export class Stateful<T> {
+class Stateful<T> {
   private listeners = new Set<(value: T) => void>();
 
   constructor(protected value: T) {}
@@ -280,7 +264,7 @@ export class Stateful<T> {
   }
 }
 
-export class Atom<T> extends Stateful<T> {
+class Atom<T> extends Stateful<T> {
   public setState(value: T) {
     super.update(value);
   }
@@ -292,7 +276,7 @@ interface GeneratorContext {
 
 type SelectorGenerator<T> = (context: GeneratorContext) => T;
 
-export class Selector<T> extends Stateful<T> {
+class Selector<T> extends Stateful<T> {
   private registeredDeps = new Set<Stateful<any>>();
 
   private addDep<V>(dep: Stateful<V>): V {
@@ -314,18 +298,18 @@ export class Selector<T> extends Stateful<T> {
   }
 }
 
-export function atom<V>(value: { key: string; default: V }): Atom<V> {
+function atom<V>(value: { key: string; default: V }): Atom<V> {
   return new Atom(value.default);
 }
 
-export function selector<V>(value: {
+function selector<V>(value: {
   key: string;
   get: SelectorGenerator<V>;
 }): Selector<V> {
   return new Selector(value.get);
 }
 
-export function useCoiledValue<T>(value: Stateful<T>): T {
+function useCoiledValue<T>(value: Stateful<T>): T {
   const [, updateState] = useState({});
 
   useEffect(() => {
@@ -336,11 +320,11 @@ export function useCoiledValue<T>(value: Stateful<T>): T {
   return value.snapshot();
 }
 
-export function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
+function useCoiledState<T>(atom: Atom<T>): [T, (value: T) => void] {
   const value = useCoiledValue(atom);
   return [value, useCallback((value) => atom.setState(value), [atom])];
-}
-```
+}`}
+</CodeBlock>
 
 ## 테스트
 
