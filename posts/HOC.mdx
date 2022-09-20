@@ -1,0 +1,144 @@
+---
+title: '고차 컴포넌트(HOC)란? Hook 코드 예제'
+category: 'dev'
+date: '2022-09-17'
+preview: 'HOC를 Hook으로'
+---
+
+HOC를 공부하려다 보니 옛날 예제(클래스형 컴포넌트)들로 나와있다.
+
+요즘엔 거의 다 Hook(함수형 컴포넌트)으로 코딩을 하기에 예제 이해하는데에 약간의 어려움이 있었다.
+
+그래서 Hook으로 정리해보려고 한다.
+
+# HOC란?
+
+공식문서 - [**HOC(Higher-Order Components)**](https://reactjs.org/docs/higher-order-components.html)
+
+한 줄로 표현하자면 이렇다.
+
+> 고차 컴포넌트는 컴포넌트를 가져와 새 컴포넌트를 반환하는 함수.(재사용성)
+
+공식문서를 완벽히 이해하면 좋겠지만 클래스형 컴포넌트로 짜여 있어 한번에 와닿기가 힘들었다. 한 번 이해하고 나면 아주 쉬운 개념이라고 할 수 있다. 공식 문서의 예제와는 조금 다르게 더 쉬운 예제로 설명하고자 한다.
+
+**`주의!`** `아래의 설명들은 무지막지하게 초간단 설명이므로 자세한 건 공식문서를 참고`
+
+## App.js
+
+<CodeBlock>
+{`import Input from './components/Input'
+import Button from './components/Button'
+
+function App() {
+  return (
+    <>
+      <Input /><br />
+      <Button />
+    </>
+  );
+}
+`}
+</CodeBlock>
+
+## components/Button.jsx
+
+<CodeBlock>
+{`import { useState, useEffect } from 'react';
+
+// Loading 3초 후 button이 보이는 Button 컴포넌트
+export default function Button() { 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return loading ? <span>Loading...</span> : <button>Button</button>;
+}
+`}
+</CodeBlock>
+
+## components/Input.jsx
+
+<CodeBlock>
+{`import { useState, useEffect } from 'react';
+
+// Loading 3초 후 input이 보이는 Input 컴포넌트
+export default function Input() { 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return loading ? <span>Loading...</span> : <input defaultValue="Input" />;
+}
+`}
+</CodeBlock>
+
+위와 같은 코드들이 있으면 누가봐도 재사용이 가능해 보인다. 이럴 때 HOC를 사용할 수 있다.
+
+## components/withLoading.jsx
+
+Button 컴포넌트와 Input 컴포넌트의 공통된 부분을 withLoading 컴포넌트로 묶어보자.
+
+<CodeBlock>
+{`import { useState, useEffect } from 'react';
+
+export default function withLoading(Component) {
+  const WithLoadingComponent = (props) => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 3000);
+      return () => clearTimeout(timer);
+    }, []);
+
+    return loading ? <span>Loading...</span> : <Component {...props} />;
+  };
+
+  return WithLoadingComponent;
+}
+`}
+</CodeBlock>
+
+이제 끝이다.
+
+## components/Button.jsx
+
+<CodeBlock>
+{`
+import withLoading from './withLoading';
+
+function Button() {
+  return <button>Button</button>;
+}
+
+export default withLoading(Button);
+`}
+</CodeBlock>
+
+## components/Input.jsx
+
+<CodeBlock>
+{`import withLoading from './withLoading';
+
+function Input() {
+  return <input defaultValue="Input" />;
+}
+
+export default withLoading(Input);
+`}
+</CodeBlock>
+
+![스크린샷 2022-09-19 오후 8.46.44.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5d75dc6f-72a6-48f5-ba6f-5caa476e846b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-19_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.46.44.png)
+
+![스크린샷 2022-09-19 오후 8.46.59.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/22d1dc1f-da75-479d-9098-27ef9dac4ff3/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-19_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.46.59.png)
+
+**[더 자세한 내용들은 공식문서](https://reactjs.org/docs/higher-order-components.html)**를 뜯어봐야겠지만 처음엔 이 정도만 이해해도 사용하는 데에 문제 없을 것 같다. (HOC의 HOC, ref는 전달되지 않음 등등..)
+
+이건 아주 기초적인 내용이다. 이러한 개념이 있다는 것을 알고 다른 부분을 공부하게 되면 ‘아 이거 HOC다!’ 하는 예제(ex. React.memo)들이 있을 것이다. 이렇게 한 번 정리해 둠으로써 딱 그 정도의 이득!?이 있을 것 같다.
+
+(사실 이 부분도 React.memo를 이해하려다 보니 HOC까지 와서 이렇게 정리함)
