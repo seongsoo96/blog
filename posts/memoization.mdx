@@ -4,7 +4,8 @@ category: 'dev'
 date: '2022-09-21'
 preview: '성능 최적화를 해보자!'
 ---
-### Memoization
+
+useCallback, useCallback, React.memo
 
 메모이제이션(memoization)은 **컴퓨터 프로그램이 동일한 계산을 반복해야 할 때, 이전에 계산한 값을 메모리에 저장함으로써 동일한 계산의 반복 수행을 제거하여 프로그램 실행 속도를 빠르게 하는 기술**이다. - 출처 위키피디아
 
@@ -33,21 +34,19 @@ function App() {
   );
 }
 
-export default App;
-`}
+export default App;`}
 </CodeBlock>
 
 ### components/Memo.jsx
 
 <CodeBlock>
-{`
-import React, { useEffect, useState } from 'react';
+{`import React, { useEffect, useState } from 'react';
 import Comments from './Comments';
 
 const commentList = [
-  \{ title: 'comment1', content: 'message1', likes: 1 },
-  \{ title: 'comment2', content: 'message2', likes: 1 },
-  \{ title: 'comment3', content: 'message3', likes: 1 },
+  { title: 'comment1', content: 'message1', likes: 1 },
+  { title: 'comment2', content: 'message2', likes: 1 },
+  { title: 'comment3', content: 'message3', likes: 1 },
 ];
 
 export default function Memo() {
@@ -58,8 +57,8 @@ export default function Memo() {
       setComments((prevComments) => [
         ...prevComments,
         {
-          title: <>'comment' + \{prevComments.length + 1},</>
-          content: 'message' + \{prevComments\.length + 1},
+          title: \`comment\${prevComments.length + 1}\`,
+          content: \`message\${prevComments.length + 1}\`,
           likes: 1,
         },
       ]);
@@ -71,8 +70,8 @@ export default function Memo() {
   }, []);
 
   return <Comments commentList={comments} />;
-}
-`}</CodeBlock>
+}`}
+</CodeBlock>
 
 3초마다 기존의 comments에 새로운 comment를 추가해 주는 코드
 
@@ -96,8 +95,8 @@ export default function Comments({ commentList }) {
       ))}
     </div>
   );
-}
-`}</CodeBlock>
+}`}
+</CodeBlock>
 
 ### components/CommentItem.jsx
 
@@ -118,8 +117,8 @@ function CommentItem({ title, content, likes }) {
   );
 }
 
-export default memo(CommentItem);
-`}</CodeBlock>
+export default memo(CommentItem);`}
+</CodeBlock>
 
 CommentItem을 memo로 감싸주며 이미 렌더링 된 comments
 
@@ -155,26 +154,26 @@ function CommentItem({ title, content, likes }) {
 	   interactions // 이 업데이트에 해당하는 상호작용들의 집합
 	 ) {
 	  // 렌더링 타이밍을 집합하거나 로그...
-		console.log(`${title}이 렌더링 되었습니다.`);	
+	  console.log(\`\${title}이 렌더링 되었습니다.\`);	
 	}
 	
   return (
     <Profiler id="CommentItem" onRender={onRenderCallback}>
-	    <div className="CommentItem">
-	      <span>{title}</span>
-	      <br />
-	      <span>{content}</span>
-	      <br />
-	      <span>{likes}</span>
-	    </div>
+      <div className="CommentItem">
+        <span>{title}</span>
+        <br />
+        <span>{content}</span>
+        <br />
+        <span>{likes}</span>
+      </div>
     </Profiler>
   );
 }
 
 // memo의 유무에 따라 성능을 비교해보자
 export default CommentItem;
-export default memo(CommentItem);
-`}</CodeBlock>
+export default memo(CommentItem);`}
+</CodeBlock>
 
 우선 memo를 안 한 상태의 console.log를 확인해보자.
 
@@ -205,7 +204,7 @@ Comments에서 CommentItem으로 onClick 함수를 전달해주자.
 import CommentItem from './CommentItem';
 
 export default function Comments({ commentList }) {
-	const handleClick = () => {
+  const handleClick = () => {
     console.log('props로 전달해준 onClick 발동!');
   };
 
@@ -222,8 +221,8 @@ export default function Comments({ commentList }) {
       ))}
     </div>
   );
-}
-`}</CodeBlock>
+}`}
+</CodeBlock>
 
 CommentItem에 item을 클릭하는 동작을 추가해보자.
 
@@ -235,14 +234,14 @@ import './CommentItem.css';
 
 // onClick props 추가
 function CommentItem({ title, content, likes, onClick }) {
-	function onRenderCallback{...}
+	function onRenderCallback(...){...}
 	
 	// 기존 component에 handleClick 추가
 	const handleClick = () => {
-		// 부모(Comments)에서 전달받은 onClick 함수.
-		onClick();
-    alert(`${title} 눌림`);
-  };
+	  // 부모(Comments)에서 전달받은 onClick 함수.
+	  onClick();
+      alert(\`\${title} 눌림\`);
+    };
 	
 	return (
 	  <Profiler id="CommentItem" onRender={onRenderCallback}>
@@ -253,8 +252,8 @@ function CommentItem({ title, content, likes, onClick }) {
 	);
 }
 
-export default memo(CommentItem);
-`}</CodeBlock>
+export default memo(CommentItem);`}
+</CodeBlock>
 
 ### memo로 메모이제이션 했는데 왜 리렌더링 할까?
 
@@ -277,8 +276,8 @@ export default memo(CommentItem);
       likes={comment.likes}
       onClick={handleClick}
     />
-))}
-`}</CodeBlock>
+))}`}
+</CodeBlock>
 
 onClick을 제외한 나머지 props들은 부모(Memo) 컴포넌트로부터 전달받은 props(commentList)들이다. 전달받은 props들은 동일한 props라서 메모이제이션을 해주었지만 handleClick함수는 Comments 컴포넌트 자체에서 새로 생성해주는 함수이다. 그러므로 Comments 자체가 리렌더링 되는 상황이다.
 
@@ -297,8 +296,8 @@ Comments의 handleClick에 useCallback를 추가해보자.
 import CommentItem from './CommentItem';
 
 export default function Comments({ commentList }) {
-	const handleClick = useCallback(() => {
-		console.log('props로 전달해준 onClick 발동!')
+  const handleClick = useCallback(() => {
+    console.log('props로 전달해준 onClick 발동!')
   }, []);
 
   return (
@@ -314,8 +313,8 @@ export default function Comments({ commentList }) {
       ))}
     </div>
   );
-}
-`}</CodeBlock>
+}`}
+</CodeBlock>
 
 ### useCallback을 추가해준 결과
 
@@ -339,12 +338,12 @@ import './CommentItem.css';
 function CommentItem({ title, content, likes, onClick }) {
   const [clickCount, setClickCount] = useState(0);
 
-  function onRenderCallback(...}
+  function onRenderCallback(...){...}
 
   const handleClick = () => {
     onClick();
     setClickCount((prev) => prev + 1);
-    alert(`${title} 눌림`);
+    alert(\`\${title} 눌림\`);
   };
 
   const rate = () => {
@@ -369,8 +368,8 @@ function CommentItem({ title, content, likes, onClick }) {
   );
 }
 
-export default memo(CommentItem);
-`}</CodeBlock>
+export default memo(CommentItem);`}
+</CodeBlock>
 
 ### comment를 클릭해보자.
 
@@ -389,16 +388,16 @@ import './CommentItem.css';
 function CommentItem({ title, content, likes, onClick }) {
   const [clickCount, setClickCount] = useState(0);
 
-  function onRenderCallback(...}
+  function onRenderCallback(...){...}
 
   const handleClick = () => {
     onClick();
     setClickCount((prev) => prev + 1);
-    alert(`${title} 눌림`);
+    alert(\`\${title} 눌림\`);
   };
 	
 	// useMemo 추가
-	const rate = useMemo(() => {
+  const rate = useMemo(() => {
     console.log('rate check');
     return likes > 10 ? 'Good' : 'Bad';
   }, [likes]);
@@ -420,8 +419,8 @@ function CommentItem({ title, content, likes, onClick }) {
   );
 }
 
-export default memo(CommentItem);
-`}</CodeBlock>
+export default memo(CommentItem);`}
+</CodeBlock>
 
 ### useMemo를 추가한 결과
 
