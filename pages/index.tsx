@@ -2,7 +2,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import profileImg from '../public/profile2.jpeg';
+import profileImg from '../public/profile3.jpeg';
 
 // import Image from "next/image";
 // import profileImg from "../public/profile2.jpeg";
@@ -38,14 +38,13 @@ const Home = () => (
         안녕하세요&#128075; 이성수입니다!!!!
       </p>
       <div className="flex bg-slate-100 rounded-xl p-6 dark:bg-slate-800">
-        <div>
+        <div className="w-{100} h-{100px} rounded-full border-2 border-solid border-slate-600">
           <Image
             src={profileImg}
             alt="profile"
             width={100}
             height={100}
-            className="rounded-lg"
-            // layout="fixed"
+            className="rounded-full"
           />
         </div>
         <div className="ml-8 pt-2">
