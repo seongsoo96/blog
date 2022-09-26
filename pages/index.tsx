@@ -32,7 +32,7 @@ const Home = () => (
       <title>Blog</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <div className="category-header overflow-hidden">
+    <div className="category-header">
       <h1 className="category-title">G&rsquo;day Mate!</h1>
       <p className="category-description text-2xl font-bold underline rounded-md underline-offset-4 decoration-8 decoration-indigo-500 mb-10">
         안녕하세요&#128075; 이성수입니다!!!!
@@ -89,14 +89,14 @@ const Home = () => (
         </div>
       </div> */}
       <br />
-      <div className="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
-        <div className="md:p-8 text-center md:text-left space-y-4">
+      <div className="md:flex bg-slate-100 rounded-xl p-6 md:p-0 dark:bg-slate-800">
+        <div className="md:p-8 md:text-left space-y-4">
           <ul>
             {category.map((c) => (
               <li key={c.name} className="text-xl">
                 <Link href={c.href}>
                   <a>
-                    <div className="py-4">
+                    <div className="pt-2 pb-4">
                       <p>
                         <span className="underline underline-offset-4 dark:hover:text-blue-400">
                           {c.name}

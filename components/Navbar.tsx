@@ -80,13 +80,13 @@ export default function Navbar() {
                   </li>
                 </a>
               </Link>
-              <Link href="/projects">
+              {/* <Link href="/projects">
                 <a>
                   <li className="mx-3 sm:mx-4 my-5 border-b-2 border-indigo-500 dark:border-white hover:border-primary transition duration-500 ">
                     Projects
                   </li>
                 </a>
-              </Link>
+              </Link> */}
               {renderThemeChanger()}
             </ol>
           </nav>
