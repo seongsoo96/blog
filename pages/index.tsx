@@ -38,7 +38,7 @@ const Home = () => (
         안녕하세요&#128075; 이성수입니다!!!!
       </p>
       <div className="flex bg-slate-100 rounded-xl p-6 dark:bg-slate-800">
-        <div className="w-{100} h-{100px} rounded-full border-2 border-solid border-slate-600">
+        <div className="w-[100px] h-[100px] rounded-full border-2 border-solid border-slate-600">
           <Image
             src={profileImg}
             alt="profile"
