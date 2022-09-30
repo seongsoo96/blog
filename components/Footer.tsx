@@ -1,7 +1,13 @@
+import { useRouter } from 'next/router';
+
 export default function Footer() {
+  const router = useRouter();
+  router.pathname === '/' ? 'h-screen overflow-hidden' : undefined;
   return (
     <>
-      <footer className="flex items-center justify-center w-full h-24">
+      <footer
+        className={router.pathname === '/' ? 'footer fixed bottom-0' : 'footer'}
+      >
         <p>Copyright ⓒ Seongsoo96 2022 All rights reserved.</p>
       </footer>
     </>

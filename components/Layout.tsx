@@ -7,7 +7,6 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const router = useRouter();
   return (
     <>
       <Navbar />
