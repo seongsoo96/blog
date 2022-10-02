@@ -6,7 +6,9 @@ export default function Footer() {
   return (
     <>
       <footer
-        className={router.pathname === '/' ? 'footer fixed bottom-0' : 'footer'}
+        className={
+          router.pathname === '/' ? 'footer md:fixed md:bottom-0' : 'footer'
+        }
       >
         <p>Copyright ⓒ Seongsoo96 2022 All rights reserved.</p>
       </footer>
