@@ -1,28 +1,31 @@
 ---
-title: 'memoization'
+title: 'Memoization (React.memo, useCallback, useMemo)'
 category: 'dev'
 date: '2022-09-21'
 preview: '성능 최적화를 해보자!'
 ---
 
-useCallback, useCallback, React.memo
+### useCallback, useCallback, React.Memo
+<br />
 
 메모이제이션(memoization)은 **컴퓨터 프로그램이 동일한 계산을 반복해야 할 때, 이전에 계산한 값을 메모리에 저장함으로써 동일한 계산의 반복 수행을 제거하여 프로그램 실행 속도를 빠르게 하는 기술**이다. - 출처 위키피디아
-
+<br />
 React에서는 메모이제이션을 세 가지 방식으로 할 수 있다.
+  <li>React.memo() - HOC</li>
+  <li>useCallback() - Hook</li>
+  <li>useMemo() - Hook</li>
 
-- React.memo() - HOC
-- useCallback() - Hook
-- useMemo() - Hook
+<br />
+<br />
 
-## [**React.memo**](https://reactjs.org/docs/react-api.html#reactmemo)
+# [**React.memo**](https://reactjs.org/docs/react-api.html#reactmemo)
 
-- [React.memo는 HOC다.](https://www.notion.so/HOC-Hook-2b08c41a07ed4d208bf3e5c85a34fa76)
-- **동일한 props로 동일한 렌더링을 한다면**, React.memo를 사용하여 성능 향상을 누릴 수 있다.
-- memo를 사용하면 React는 컴포넌트를 렌더링하지 않고 마지막으로 렌더링된 결과를 재사용한다.
+<li>[React.memo는 HOC다.](https://www.notion.so/HOC-Hook-2b08c41a07ed4d208bf3e5c85a34fa76)</li>
+<li>**동일한 props로 동일한 렌더링을 한다면**, React.memo를 사용하여 성능 향상을 누릴 수 있다.</li>
+<li>memo를 사용하면 React는 컴포넌트를 렌더링하지 않고 마지막으로 렌더링된 결과를 재사용한다.</li>
+<br />
 
-### App.js
-
+## App.js
 <CodeBlock>
 {`import Memo from './components/Memo';
 
@@ -36,9 +39,9 @@ function App() {
 
 export default App;`}
 </CodeBlock>
+<br />
 
-### components/Memo.jsx
-
+## components/Memo.jsx
 <CodeBlock>
 {`import React, { useEffect, useState } from 'react';
 import Comments from './Comments';
@@ -72,11 +75,10 @@ export default function Memo() {
   return <Comments commentList={comments} />;
 }`}
 </CodeBlock>
-
 3초마다 기존의 comments에 새로운 comment를 추가해 주는 코드
+<br />
 
-### components/Comments.jsx
-
+## components/Comments.jsx
 <CodeBlock>
 {`import React from 'react';
 import CommentItem from './CommentItem';
@@ -97,9 +99,9 @@ export default function Comments({ commentList }) {
   );
 }`}
 </CodeBlock>
+<br />
 
-### components/CommentItem.jsx
-
+## components/CommentItem.jsx
 <CodeBlock>
 {`import React, { memo } from 'react';
 import './CommentItem.css';
@@ -119,26 +121,24 @@ function CommentItem({ title, content, likes }) {
 
 export default memo(CommentItem);`}
 </CodeBlock>
-
 CommentItem을 memo로 감싸주며 이미 렌더링 된 comments
-
 ![스크린샷 2022-09-20 오후 11.04.54.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7f69a1b-b400-4f1e-a82e-94eedcc204cd/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-20_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.04.54.png)
-
 ![스크린샷 2022-09-20 오후 11.03.53.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4aa6ed6-9ab5-491a-800c-3b66233b59dd/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-20_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.03.53.png)
-
 실행을 시켜보면 왼쪽 commentList가 기본으로 렌더링 되고 아래 하나씩 추가되는 것을 확인할 수 있다.
-
 과연 위의 이미지들이 최적화 되고 있다는 것을 어떻게 확인할 수 있을까?
+<br />
+<br />
 
-## [**Profiler API**](https://reactjs.org/docs/profiler.html#gatsby-focus-wrapper)
+# [**Profiler API**](https://reactjs.org/docs/profiler.html#gatsby-focus-wrapper)
 
-- React에서 제공하고 있는 성능 최적화 확인용 API이다.
-- 렌더링하는 빈도와 렌더링 비용을 측정한다.
+  <li> React에서 제공하고 있는 성능 최적화 확인용 API이다.</li>
+  <li> 렌더링하는 빈도와 렌더링 비용을 측정한다.</li>
 
+<br />
 CommentItem에 Profiler를 추가해주자.(공식문서의 내용을 가져온 코드)
+<br />
 
-### comments/CommentItem.jsx
-
+## comments/CommentItem.jsx
 <CodeBlock>
 {`import React, { Profiler, memo } from 'react';
 import './CommentItem.css';
@@ -174,10 +174,11 @@ function CommentItem({ title, content, likes }) {
 export default CommentItem;
 export default memo(CommentItem);`}
 </CodeBlock>
+<br />
 
 우선 memo를 안 한 상태의 console.log를 확인해보자.
-
-### export default CommentItem 결과
+<br />
+## export default CommentItem 결과
 
 ![스크린샷 2022-09-20 오후 11.28.54.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/11d59291-01f8-467e-bb39-998d15e33d0b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-20_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.28.54.png)
 
