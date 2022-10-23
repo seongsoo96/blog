@@ -122,8 +122,11 @@ function CommentItem({ title, content, likes }) {
 export default memo(CommentItem);`}
 </CodeBlock>
 CommentItem을 memo로 감싸주며 이미 렌더링 된 comments
-![스크린샷 2022-09-20 오후 11.04.54.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7f69a1b-b400-4f1e-a82e-94eedcc204cd/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-20_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.04.54.png)
-![스크린샷 2022-09-20 오후 11.03.53.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4aa6ed6-9ab5-491a-800c-3b66233b59dd/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-20_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.03.53.png)
+<div className="flex">
+  <div>![aa1](/images/posts/Memoization/aa1.png)</div>
+  <div>![aa2](/images/posts/Memoization/aa2.png)</div>
+</div>
+<br />
 실행을 시켜보면 왼쪽 commentList가 기본으로 렌더링 되고 아래 하나씩 추가되는 것을 확인할 수 있다.
 과연 위의 이미지들이 최적화 되고 있다는 것을 어떻게 확인할 수 있을까?
 <br />
@@ -180,25 +183,25 @@ export default memo(CommentItem);`}
 <br />
 ## export default CommentItem 결과
 
-![스크린샷 2022-09-20 오후 11.28.54.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/11d59291-01f8-467e-bb39-998d15e33d0b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-20_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.28.54.png)
+![aa3](/images/posts/Memoization/aa3.png)
 
 로그 순서를 보면 123 → 1234 → 12345 이렇게 나오는 것을 확인할 수 있다. commentItem 하나가 추가될 때마다 commentList 전부를 다시 렌더링하는 상황이다. 무척이나 비효율적인 것을 확인할 수 있다.
-
+<br />
 다음은 memo를 한 상태의 console.log를 확인해보자.
+<br />
+## export default memo(CommentItem) 결과
 
-### export default memo(CommentItem) 결과
-
-![스크린샷 2022-09-20 오후 11.33.20.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/514525bf-02ac-41d5-8c5c-da6b95fe4bea/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-20_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_11.33.20.png)
+![aa4](/images/posts/Memoization/aa4.png)
 
 확연히 렌더링이 줄어든 모습을 확인할 수 있다. 기존의 commentList들은 한 번 렌더링이 된 상태이고 comment123의 값이 바뀌지 않는 상태이기 때문에 메모이제이션을 하고 새로 추가되는 commentItem들만 렌더링 해주는 것을 확인할 수 있다.
-
+<br />
 ## 그럼 useCallback은 언제 쓰일까?
 
 우선 아래 예시부터 확인해보자.
 
 Comments에서 CommentItem으로 onClick 함수를 전달해주자.
-
-### components/Comments.jsx
+<br />
+## components/Comments.jsx
 
 <CodeBlock>
 {`import React from 'react';
@@ -226,8 +229,8 @@ export default function Comments({ commentList }) {
 </CodeBlock>
 
 CommentItem에 item을 클릭하는 동작을 추가해보자.
-
-### components/CommentItem.jsx
+<br />
+## components/CommentItem.jsx
 
 <CodeBlock>
 {`import React, { Profiler, memo } from 'react';
@@ -256,9 +259,9 @@ function CommentItem({ title, content, likes, onClick }) {
 export default memo(CommentItem);`}
 </CodeBlock>
 
-### memo로 메모이제이션 했는데 왜 리렌더링 할까?
+## memo로 메모이제이션 했는데 왜 리렌더링 할까?
 
-![스크린샷 2022-09-21 오전 12.03.15.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c9ed4e2f-6ea9-450c-ad4b-b6589ead58e4/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-21_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_12.03.15.png)
+![aa5](/images/posts/Memoization/aa5.png)
 
 다시 React.memo 공식문서를 확인하자.
 
@@ -282,15 +285,16 @@ export default memo(CommentItem);`}
 
 onClick을 제외한 나머지 props들은 부모(Memo) 컴포넌트로부터 전달받은 props(commentList)들이다. 전달받은 props들은 동일한 props라서 메모이제이션을 해주었지만 handleClick함수는 Comments 컴포넌트 자체에서 새로 생성해주는 함수이다. 그러므로 Comments 자체가 리렌더링 되는 상황이다.
 
-이럴 때 사용할 수 있는 것이 바로 useCallback이다.
+이럴 때 사용할 수 있는 것이 바로 useCallback이다. 
+<br />
 
-## [**useCallback**](https://reactjs.org/docs/hooks-reference.html#usecallback)
+# [**useCallback**](https://reactjs.org/docs/hooks-reference.html#usecallback)
 
 - **메모이제이션된 콜백을 반환한다.**
 
 Comments의 handleClick에 useCallback를 추가해보자.
 
-### components/Comments.jsx
+## components/Comments.jsx
 
 <CodeBlock>
 {`import React, { useCallback } from 'react';
@@ -317,20 +321,20 @@ export default function Comments({ commentList }) {
 }`}
 </CodeBlock>
 
-### useCallback을 추가해준 결과
+## useCallback을 추가해준 결과
 
-![스크린샷 2022-09-21 오전 12.32.05.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/27bacce6-d09b-450a-ad4a-f5ed92ba529b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-21_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_12.32.05.png)
+![aa6](/images/posts/Memoization/aa6.png)
 
 useCallback은 공식문서에 나와있는대로 메모이제이션 된 콜백을 반환한다. 즉 handleClick이라는 함수는 메모이제이션 된 상태이다. 그러므로 CommentItem에 전달해주는 props들은 모두 메모이제이션 된 상태가 되므로 최적화된 렌더링을 보여주게 된다.
-
+<br />
 ## 그렇담! useMemo는 언제 쓰일까? (거의 다 왔다!)
 
 요구사항을 추가해 볼 건데..
 
 - rate는 like가 10보다 크면 rate = good, 아니면 bad 반환하는 함수이다.
 - 자신(CommentItem)이 클릭되었을 때 clickCount 증가하는 state 추가
-
-### component/CommentItem.jsx
+<br />
+## component/CommentItem.jsx
 
 <CodeBlock>
 {`import React, { Profiler, memo, useState } from 'react';
@@ -372,15 +376,15 @@ function CommentItem({ title, content, likes, onClick }) {
 export default memo(CommentItem);`}
 </CodeBlock>
 
-### comment를 클릭해보자.
+## comment를 클릭해보자.
 
-![스크린샷 2022-09-21 오후 9.32.30.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/59029a8c-bb06-4852-8e5e-d20ce9d73f8b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-21_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.32.30.png)
+![aa7](/images/posts/Memoization/aa7.png)
 
 이 부분이 헷갈릴 수도 있는데 로그를 잘 보면 useMemo의 차이점을 알 수가 있다.
 
 현재 useMemo를 쓰지 않은 상태이다. comment3을 눌렀을 때 다시 comment3이 렌더링 되고나서 comment6, comment7… 이렇게 진행되는 것을 확인할 수 있다. clickCount state가 바뀌었으니까 당연히 리렌더링 되는 것은 OK. 하지만 rate함수도 다시 그려지고 있는 것을 확인할 수 있다. 이 부분을 memoization할 때 쓸 수 있는 것이 바로 useMemo이다. 한번 확인해보자.
-
-### components/CommentItem.jsx
+<br />
+## components/CommentItem.jsx
 
 <CodeBlock>
 {`import React, { Profiler, memo, useState, useMemo } from 'react';
@@ -423,18 +427,18 @@ function CommentItem({ title, content, likes, onClick }) {
 export default memo(CommentItem);`}
 </CodeBlock>
 
-### useMemo를 추가한 결과
+## useMemo를 추가한 결과
 
-![스크린샷 2022-09-21 오후 9.43.24.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a3849c45-ff35-4af2-ae53-b3b1359c8dd0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2022-09-21_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.43.24.png)
+![aa8](/images/posts/Memoization/aa8.png)
 
 위에서도 설명했듯이 자기자신이 눌렸으니까 리렌더링은 OK. 하지만 이번엔 rateCheck를 하지 않는 것을 볼 수 있다.
-
-## [useMemo](https://reactjs.org/docs/hooks-reference.html#usememo)
+<br />
+# [**useMemo**](https://reactjs.org/docs/hooks-reference.html#usememo)
 
 - **메모이제이션된 값을 반환한다.**
 
 이 부분이 useCallback과 useMemo의 차이이다. 메모이제이션된 콜백(함수)를 반환하는가 값을 반환하는가.
-
-### 짤막 후기.
+<br />
+# 짤막 후기.
 
 이렇게 정리해보니까 얼추 ‘아 이런게 있구나.. 이런 차이가 있구나.. 이럴 때 쓸 수 있구나’ 정도가 머리속에 정리 된 것 같다. 이 글을 쓰는 시점에서 나는 현재 프론트엔드 개발자가 아니다. 즉.. 이것을 쓰게 될 날이 올 때쯤이면 까먹을 수 있다는 소리이다. 하지만 최적화에 대해서 한번 고민하는 시간을 가졌고 앞으로 프론트엔드 개발자로서 성장하는데 밑거름이 되었다는 것에는 확신을 갖는다.
