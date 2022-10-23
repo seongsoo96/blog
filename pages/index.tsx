@@ -62,12 +62,18 @@ const Home = () => {
                 </blockquote>
               </div>
               <div>
-                <Image
-                  src={currentTheme === 'dark' ? githubDark : githubLight}
-                  alt="github logo"
-                  width={20}
-                  height={20}
-                />
+                <a
+                  href="https://github.com/seongsoo96"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Image
+                    src={currentTheme === 'dark' ? githubDark : githubLight}
+                    alt="github logo"
+                    width={20}
+                    height={20}
+                  />
+                </a>
               </div>
             </div>
             <figcaption className="font-medium mt-1">
