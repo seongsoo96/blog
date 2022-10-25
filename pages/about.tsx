@@ -7,8 +7,6 @@ import { useTheme } from 'next-themes';
 import Link from 'next/link';
 
 const category = [
-  { name: 'Resume', href: '/blog', desc: '여기엔 내 블로그 주소' },
-  { name: 'Website', href: '/about', desc: '여기엔 웹사이트 주소' },
   {
     name: 'Github',
     href: '/algorithm',
@@ -17,7 +15,7 @@ const category = [
   {
     name: 'Email',
     href: '/portfolio',
-    desc: 'gasmathdog@gmail.com',
+    desc: 'seongsoo.dev@gmail.com',
   },
   {
     name: 'Mobile',
@@ -27,6 +25,18 @@ const category = [
 ];
 
 const badge = [
+  // {
+  //   alt: 'TypeScript',
+  //   src: 'https://img.shields.io/badge/Typescript-ffb13b?style=flat-square&logo=typescript&logoColor=white',
+  // },
+  // {
+  //   alt: 'JavaScript',
+  //   src: 'https://img.shields.io/badge/Javascript-ffb13b?style=flat-square&logo=javascript&logoColor=white',
+  // },
+  // {
+  //   alt: 'JavaScript',
+  //   src: 'https://img.shields.io/badge/Javascript-ffb13b?style=flat-square&logo=javascript&logoColor=white',
+  // },
   {
     alt: 'JavaScript',
     src: 'https://img.shields.io/badge/Javascript-ffb13b?style=flat-square&logo=javascript&logoColor=white',
@@ -110,14 +120,16 @@ export default function About() {
       <div className="flex justify-between items-center md:items-start flex-col-reverse md:flex-row mb-6">
         <div className="text-center md:text-left">
           <h1>&ldquo;안녕하세요👋</h1>
-          <h1>흐름을 읽는 개발자</h1>
+          <h1>함께하면 즐거운 개발자</h1>
           <h1>
             <span className="font-bold">이성수</span>입니다.&rdquo;
           </h1>
           <br />
-          <p>코드의 흐름을 이해하며 발전하고 있습니다.</p>
-          <p>빠른 습득력을 가지고 있습니다.</p>
-          <p>새로운 것을 받아들이는 데에 즐거움을 느낍니다.</p>
+          <p>읽기 좋은 코드를 작성하고자 노력합니다.</p>
+          <p>새로운 기술을 배우는 것을 좋아합니다.</p>
+          <p>개인보다는 팀을 더 중요한 가치로 생각합니다.</p>
+          <p>학습의 즐거움으로 살아가고 있습니다.</p>
+          <p>기록하고 공유하는 것을 좋아합니다.</p>
           <button className="flex flex-row items-center justify-center md:justify-start w-full px-1 py-1 mt-2 text-sm font-semibold text-left bg-transparent rounded-full md:w-auto md:mt-0 md:ml-2 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
             <a
               href="https://github.com/seongsoo96"
@@ -143,24 +155,88 @@ export default function About() {
       <h1 className="about-title">자기소개</h1>
       <article>
         <div className="content">
-          안녕하세요. 저는 @@에서 병원 솔루션을 개발하는 웹개발자입니다.
+          현재 병원 CRM, EMR, ERP를 개발하는 솔루션 기업에서 웹개발자로 근무하고
+          있습니다. 프론트엔드 개발자로의 전향을 계획하며 퇴근 후에 꾸준히
+          학습하며 준비중입니다. CS지식을 쌓기 위해 방통대에 신입학하여 학업과
+          일 병행하고 있습니다.{' '}
         </div>
       </article>
-      <h1 className="about-title">경력사항</h1>
+      {/* <h1 className="about-title">경력사항</h1>
       <article>
         <div className="content">
-          아직은 경력사항이 얼마 되지 않지만 채워갈 생각에 설레입니다.
-          <h3>@@@</h3>
-          <p>- 재직중 2021-07-21 ~</p>
+          링크올
+        </div>
+      </article> */}
+      <h1 className="about-title">업무경험</h1>
+      <article>
+        <div className="content">
+          <h2 className="font-bold">학생검진 신규 개발</h2>
+          <p className="ml-2">2022.09 ~ 2022.10</p>
+          <p className="ml-2">- 학생검진 개발.</p>
+          <p className="ml-2">
+            - 외부 프로그램(B형간염,x-ray, 흉부 등)의 정보들을 emr에 연동.
+          </p>
+          <p className="ml-2">
+            - 검사항목과 검진결과를 기반으로 자동판정 기능 개발.
+          </p>
+          <br />
+          <h2 className="font-bold">병원 청구 프로세스 신규 개발</h2>
+          <p className="ml-2">2022.01 ~ 2022.07</p>
+          <p className="ml-2">- 공단검진 관련 항목들 (주로 청구 관련) 개발.</p>
+          <p className="ml-2">- 공단검진 접수 후 청구까지의 프로세스 개발.</p>
+          <p className="ml-2">- crm 문진표와 emr 문진표의 연동.</p>
+          <p className="ml-2">- emr 문진표와 emr 검진결과연동.</p>
+          <p className="ml-2">
+            - 문진표, 검진결과를 기반으로 한 청구 문서 개발.
+          </p>
+          <p className="ml-2">- 기술스택 -`vue.js` / `spring` / `jpa`</p>
+          <br />
+          <h2 className="font-bold">병원 홈페이지 개발</h2>
+          <p className="ml-2">2021.11 ~ 2021.12 </p>
+          <p className="ml-2">
+            - 업체에 매달 비용을 지불하여 운영되고 있는 병원 홈페이지를 온전히
+            회사 자원으로 만들기 위해 자체 개발을 진행
+          </p>
+          <p className="ml-2">
+            - 웹퍼블리싱 작업 + 이미지 교체용 관리자 페이지 개발.
+          </p>
+          <p className="ml-2">- 전체적인 레이아웃 공통화 작업</p>
+          <p className="ml-2">
+            - 관리자 페이지 작업, 홈페이지에 들어갈 사진 교체 기능 개발.
+          </p>
+          <p className="ml-2">
+            - 사이트 -[https://www.naraemedic.com/](https://www.naraemedic.com/)
+          </p>
+          <p className="ml-2">- 기술스택 - `handlebar.js` / `spring` / `jpa`</p>
+          <br />
+          <h2 className="font-bold">진료대기현황</h2>
+          <p className="ml-2">2021.09 ~ 2021.10</p>
+          <p className="ml-2">
+            - 일반 병원에 있는 진료대기현황이 없어서 자체 개발을 진행.
+          </p>
+          <p className="ml-2">
+            - 현재 병원에서 사용하는 시스템을 분석하여 진료상태 변화를 파악한 후
+            실시간으로 데이터(대기자/진료자 등)를 제공.
+          </p>
+          <p className="ml-2">
+            - 설정값(화면 분할, 광고, 진료실등)의 재사용을 위해 localStorage에
+            저장.
+          </p>
+          <p className="ml-2">
+            - 진료대기현황에 같이 보여질자동 광고 슬라이드 기능을 구현.
+          </p>
+          <p className="ml-2">
+            - 기술스택 - `vue.js` / `handlebar.js`/ `spring` / `jpa`
+          </p>
         </div>
       </article>
-      <h1 className="about-title">Contact</h1>
+      {/* <h1 className="about-title">Contact</h1>
       <article>
         <div className="content">
           <ul>
             {category.map((c) => (
               <li key={c.name} className="text-xl">
-                <Link href={c.href}>
+                <a href={c.href}>
                   <a>
                     <div className="py-4">
                       <p>
@@ -171,24 +247,19 @@ export default function About() {
                       </p>
                     </div>
                   </a>
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
         </div>
-      </article>
-      <h1 className="about-title">업무경험</h1>
+      </article> */}
+
+      {/* <h1 className="about-title">프로젝트</h1>
       <article>
         <div className="content">
           안녕하세요. 저는 @@에서 병원 솔루션을 개발하는 웹개발자입니다.
         </div>
-      </article>
-      <h1 className="about-title">프로젝트</h1>
-      <article>
-        <div className="content">
-          안녕하세요. 저는 @@에서 병원 솔루션을 개발하는 웹개발자입니다.
-        </div>
-      </article>
+      </article> */}
       <h1 className="about-title">기술스택</h1>
       <article>
         <div className="content flex justify-center items-start flex-wrap">
@@ -229,7 +300,7 @@ export default function About() {
           <p className="ml-2">- 2021.05</p>
         </div>
       </article>
-      <p>Last Updated</p>
+      <p>Last Updated 22/10/25</p>
     </>
   );
 }
